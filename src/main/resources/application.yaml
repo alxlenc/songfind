@@ -12,7 +12,7 @@ application:
     name: songfind
   auth:
     realm: music
-    server: localhost:8080
+    server: localhost:9080
     audience: "myaudience"
     provider-id: songfind # Has to match spring.security.oauth2.client.registration.{provider-id}
 

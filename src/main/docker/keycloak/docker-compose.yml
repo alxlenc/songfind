@@ -1,7 +1,7 @@
-# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
+# This configuration is intended for development purpose
 #  Export command to execute
 #   ~/opt/keycloak/keycloak-12.0.4/bin/standalone.sh -Dkeycloak.migration.action=export -Dkeycloak.migration.provider=dir \
-  -Dkeycloak.migration.dir=./export -Dkeycloak.migration.realmName=music
+#  -Dkeycloak.migration.dir=./export -Dkeycloak.migration.realmName=music
 version: '3.2'
 services:
   keycloak:
