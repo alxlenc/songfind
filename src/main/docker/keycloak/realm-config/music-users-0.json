@@ -1,0 +1,27 @@
+{
+  "realm" : "music",
+  "users" : [ {
+    "id" : "c4f0e352-e1cc-4f72-bb9f-e37983134cdb",
+    "createdTimestamp" : 1614709812665,
+    "username" : "test1@gmail.com",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : true,
+    "email" : "test1@gmail.com",
+    "credentials" : [ {
+      "id" : "d256ffc8-e516-46cc-9e6b-ebf1299ddc2a",
+      "type" : "password",
+      "createdDate" : 1614709895147,
+      "secretData" : "{\"value\":\"vUUAxqbPP72oAuJKsFy3WKFME/4WV2HIX0VAK3oFFIzYyapgkgTYJGW668OycmDg/CITyVtuUv+1UqllBljaWg==\",\"salt\":\"0X5Me1uSFyQ6onLFv/8/lw==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "offline_access", "uma_authorization" ],
+    "clientRoles" : {
+      "account" : [ "manage-account", "view-profile" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  } ]
+}

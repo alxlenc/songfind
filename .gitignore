@@ -6,7 +6,6 @@ target/
 
 **/*.jar
 **/*.jar.deployed
-src/main/docker/keycloak/realm-config
 
 secrets.properties
 
