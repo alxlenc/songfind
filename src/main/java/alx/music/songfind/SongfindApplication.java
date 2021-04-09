@@ -1,0 +1,15 @@
+package alx.music.songfind;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SongfindApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(SongfindApplication.class, args);
+  }
+
+}
+
+

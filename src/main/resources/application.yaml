@@ -1,0 +1,62 @@
+
+server:
+  port: 8888
+
+#logging:
+#  level:
+#    ROOT: DEBUG
+#    io.github.jhipster: DEBUG
+#    com.mycompany.myapp: DEBUG
+application:
+  client-app:
+    name: songfind
+  auth:
+    realm: music
+    server: localhost:8080
+    audience: "myaudience"
+    provider-id: songfind # Has to match spring.security.oauth2.client.registration.{provider-id}
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+
+          songfind: # this is the provider_id -> has to match ${application.auth.provider-id} value
+            client-id: "@songfind.client.id@"
+            client-secret: "@songfind.client.secret@"
+            scope: openid, spring-front, email, profile
+            authorization-grant-type: authorization_code # this could also be password or something else <-- Review/Check
+
+          spotify:
+            client-id: "@spotify.client.id@"
+            client-secret: "@spotify.client.secret@"
+            authorization-grant-type: authorization_code
+            authentication-scheme: query
+            client-authentication-scheme: form
+            scope: user-read-private, user-read-email
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+
+        provider:
+          songfind:
+            authorization-uri: http://${application.auth.server}/auth/realms/${application.auth.realm}/protocol/openid-connect/auth
+            jwk-set-uri: http://${application.auth.server}/auth/realms/${application.auth.realm}/protocol/openid-connect/certs
+            token-uri: http://${application.auth.server}/auth/realms/${application.auth.realm}/protocol/openid-connect/token
+            issuer-uri: http://${application.auth.server}/auth/realms/${application.auth.realm}
+          spotify:
+            token-uri: https://accounts.spotify.com/api/token
+            authorization-uri: https://accounts.spotify.com/authorize
+            user-name-attribute: display_name
+            user-info-uri: https://api.spotify.com/v1/me
+
+
+management:
+  health:
+    readinessState:
+      enabled: true
+    livenessState:
+      enabled: true
+
+
+
+
