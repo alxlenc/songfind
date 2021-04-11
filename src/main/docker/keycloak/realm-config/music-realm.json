@@ -1,7 +1,7 @@
 {
   "id" : "music",
   "realm" : "music",
-  "notBefore" : 0,
+  "notBefore" : 1616058673,
   "revokeRefreshToken" : false,
   "refreshTokenMaxReuse" : 0,
   "accessTokenLifespan" : 300,
@@ -24,7 +24,7 @@
   "actionTokenGeneratedByUserLifespan" : 300,
   "enabled" : true,
   "sslRequired" : "external",
-  "registrationAllowed" : false,
+  "registrationAllowed" : true,
   "registrationEmailAsUsername" : false,
   "rememberMe" : false,
   "verifyEmail" : false,
@@ -53,6 +53,27 @@
       "id" : "96dfa415-3213-49d7-a309-a4cfff95c398",
       "name" : "uma_authorization",
       "description" : "${role_uma_authorization}",
+      "composite" : false,
+      "clientRole" : false,
+      "containerId" : "music",
+      "attributes" : { }
+    }, {
+      "id" : "d6f493cc-caa9-45df-8565-8d0b5513d398",
+      "name" : "ROLE_ADMIN",
+      "composite" : false,
+      "clientRole" : false,
+      "containerId" : "music",
+      "attributes" : { }
+    }, {
+      "id" : "263a3e8f-e143-47b5-9bc6-2d89db34f9d9",
+      "name" : "ROLE_USER",
+      "composite" : false,
+      "clientRole" : false,
+      "containerId" : "music",
+      "attributes" : { }
+    }, {
+      "id" : "068066a4-9402-4fce-8877-f998ff82d8c3",
+      "name" : "songfind-user",
       "composite" : false,
       "clientRole" : false,
       "containerId" : "music",
@@ -305,10 +326,27 @@
         "clientRole" : true,
         "containerId" : "d1dcf6c3-9e0f-441f-909c-a742e443d6f0",
         "attributes" : { }
-      } ]
+      } ],
+      "frontend" : [ ]
     }
   },
-  "groups" : [ ],
+  "groups" : [ {
+    "id" : "29abf6af-cfa1-4291-b100-423d08ce9bc5",
+    "name" : "admins",
+    "path" : "/admins",
+    "attributes" : { },
+    "realmRoles" : [ "ROLE_ADMIN" ],
+    "clientRoles" : { },
+    "subGroups" : [ ]
+  }, {
+    "id" : "f8c1e067-645b-4fa7-b975-36df0d84ce48",
+    "name" : "users",
+    "path" : "/users",
+    "attributes" : { },
+    "realmRoles" : [ "ROLE_USER" ],
+    "clientRoles" : { },
+    "subGroups" : [ ]
+  } ],
   "defaultRoles" : [ "offline_access", "uma_authorization" ],
   "requiredCredentials" : [ "password" ],
   "otpPolicyType" : "totp",
@@ -471,6 +509,50 @@
     "nodeReRegistrationTimeout" : 0,
     "defaultClientScopes" : [ "web-origins", "role_list", "roles", "profile", "email" ],
     "optionalClientScopes" : [ "address", "phone", "offline_access", "microprofile-jwt" ]
+  }, {
+    "id" : "f22d7932-1fe5-4bac-bfc3-67cb6f7f5821",
+    "clientId" : "frontend",
+    "surrogateAuthRequired" : false,
+    "enabled" : true,
+    "alwaysDisplayInConsole" : false,
+    "clientAuthenticatorType" : "client-secret",
+    "secret" : "0370679d-407d-4f71-80ba-958f6f4f6e83",
+    "redirectUris" : [ "*" ],
+    "webOrigins" : [ "*" ],
+    "notBefore" : 0,
+    "bearerOnly" : false,
+    "consentRequired" : false,
+    "standardFlowEnabled" : true,
+    "implicitFlowEnabled" : false,
+    "directAccessGrantsEnabled" : false,
+    "serviceAccountsEnabled" : false,
+    "publicClient" : true,
+    "frontchannelLogout" : false,
+    "protocol" : "openid-connect",
+    "attributes" : {
+      "saml.assertion.signature" : "false",
+      "saml.force.post.binding" : "false",
+      "saml.multivalued.roles" : "false",
+      "saml.encrypt" : "false",
+      "login_theme" : "music",
+      "backchannel.logout.revoke.offline.tokens" : "false",
+      "saml.server.signature" : "false",
+      "saml.server.signature.keyinfo.ext" : "false",
+      "exclude.session.state.from.auth.response" : "false",
+      "backchannel.logout.session.required" : "true",
+      "client_credentials.use_refresh_token" : "false",
+      "saml_force_name_id_format" : "false",
+      "saml.client.signature" : "false",
+      "tls.client.certificate.bound.access.tokens" : "false",
+      "saml.authnstatement" : "false",
+      "display.on.consent.screen" : "false",
+      "saml.onetimeuse.condition" : "false"
+    },
+    "authenticationFlowBindingOverrides" : { },
+    "fullScopeAllowed" : true,
+    "nodeReRegistrationTimeout" : -1,
+    "defaultClientScopes" : [ "web-origins", "role_list", "spring-front" ],
+    "optionalClientScopes" : [ "profile", "roles", "email" ]
   }, {
     "id" : "90f66b8b-828b-4d7f-b921-14d721312af5",
     "clientId" : "realm-management",
@@ -965,6 +1047,53 @@
         "claim.name" : "realm_access.roles",
         "jsonType.label" : "String",
         "multivalued" : "true"
+      }
+    } ]
+  }, {
+    "id" : "d97d6e0a-4091-441b-bfe3-dab7132f213a",
+    "name" : "spring-front",
+    "protocol" : "openid-connect",
+    "attributes" : {
+      "include.in.token.scope" : "true",
+      "display.on.consent.screen" : "true"
+    },
+    "protocolMappers" : [ {
+      "id" : "4d9e33a8-1adc-467f-82b5-9a7fc8e609de",
+      "name" : "authorities",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-realm-role-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "id.token.claim" : "true",
+        "access.token.claim" : "true",
+        "claim.name" : "roles",
+        "multivalued" : "true",
+        "userinfo.token.claim" : "true"
+      }
+    }, {
+      "id" : "2c1cf2a3-1961-4dc4-98ba-44990edff9da",
+      "name" : "aud",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-audience-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "included.client.audience" : "frontend",
+        "id.token.claim" : "false",
+        "access.token.claim" : "true"
+      }
+    }, {
+      "id" : "d3b7ba5f-cb65-437a-b4c2-3334ace53cd9",
+      "name" : "username",
+      "protocol" : "openid-connect",
+      "protocolMapper" : "oidc-usermodel-property-mapper",
+      "consentRequired" : false,
+      "config" : {
+        "userinfo.token.claim" : "true",
+        "user.attribute" : "username",
+        "id.token.claim" : "true",
+        "access.token.claim" : "true",
+        "claim.name" : "preferred_username",
+        "jsonType.label" : "String"
       }
     } ]
   }, {

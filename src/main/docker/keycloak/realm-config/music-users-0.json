@@ -11,8 +11,57 @@
     "credentials" : [ {
       "id" : "d256ffc8-e516-46cc-9e6b-ebf1299ddc2a",
       "type" : "password",
-      "createdDate" : 1614709895147,
-      "secretData" : "{\"value\":\"vUUAxqbPP72oAuJKsFy3WKFME/4WV2HIX0VAK3oFFIzYyapgkgTYJGW668OycmDg/CITyVtuUv+1UqllBljaWg==\",\"salt\":\"0X5Me1uSFyQ6onLFv/8/lw==\",\"additionalParameters\":{}}",
+      "createdDate" : 1615224756481,
+      "secretData" : "{\"value\":\"qIm5Od/I6T8ljuP/lUdRSC2ILJoMr6JcQdZutA/bc+d++czaMHhoPbCGYKBfqkEEZcmM0qMZ5AFPcD42lfJKOQ==\",\"salt\":\"OYGHEw0k8HdWgaSk1bxMDQ==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "offline_access", "uma_authorization" ],
+    "clientRoles" : {
+      "account" : [ "manage-account", "view-profile" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  }, {
+    "id" : "db6a6ac6-937e-4add-a029-e524235b66cd",
+    "createdTimestamp" : 1614859059513,
+    "username" : "alice",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : true,
+    "firstName" : "Alice",
+    "lastName" : "LastName1",
+    "email" : "test2@gmail.com",
+    "credentials" : [ {
+      "id" : "9493c260-897d-42b0-bb61-b5579d009865",
+      "type" : "password",
+      "createdDate" : 1614859091184,
+      "secretData" : "{\"value\":\"0+8+XK0gy3Bld6uWP30bsx4SUkgMcl7QYm2oc+I5PT2uDEtiIcc3tqTYPHR2tDUYtlOG9IPwC1Ziz0XUOnrPJw==\",\"salt\":\"qJlYE5vSVv6o2IeR7mWnqQ==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "songfind-user" ],
+    "clientRoles" : {
+      "account" : [ "manage-account", "view-profile" ]
+    },
+    "notBefore" : 1616006150,
+    "groups" : [ "/users" ]
+  }, {
+    "id" : "06fce2e7-d706-4e4f-8424-c54c097af607",
+    "createdTimestamp" : 1615472898594,
+    "username" : "julia",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : true,
+    "firstName" : "Julia",
+    "lastName" : "Serna",
+    "credentials" : [ {
+      "id" : "a76c4396-86dc-42ee-aa72-82bdfb79bf42",
+      "type" : "password",
+      "createdDate" : 1616495799903,
+      "secretData" : "{\"value\":\"SeehD6xX0js/MdZSDKAvddK+d6hyFeKmFRDfaW3yLcLx1+hinPsQ746v6eZe7ImxRPrQfW4QU7TY1EaI7e2HWw==\",\"salt\":\"MuSGZHhyKNnU4WIxhtQKmA==\",\"additionalParameters\":{}}",
       "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
     } ],
     "disableableCredentialTypes" : [ ],
