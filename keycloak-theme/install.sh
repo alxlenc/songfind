@@ -18,7 +18,10 @@ echo "Installing to dir $(
   pwd
 )/$(basename "$install_dir")"
 
-rm $install_dir/deploy/*
+[[ ! -d $install_dir/deploy ]] && mkdir $install_dir/deploy
+
+[[ -n "$(ls -A $install_dir/deploy)" ]] && rm $install_dir/deploy/*
+
 cp $theme_jar $install_dir/deploy/$jar_filename
 
 echo "Theme $jar_filename installed successfully!!!"
