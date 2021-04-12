@@ -2,7 +2,6 @@ package alx.music.songfind;
 
 import java.io.File;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -13,17 +12,17 @@ import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
+import org.testcontainers.utility.MountableFile;
 
 @SpringBootTest
 @Testcontainers
 class SongfindApplicationIT {
 
-  public static final Logger LOGGER = LoggerFactory.getLogger(SongfindApplicationIT.class);
-  private static Slf4jLogConsumer logConsumer =
-      new Slf4jLogConsumer(LOGGER);
+  private final static String KEYCLOAK_BASE_PATH = new File("src/main/docker/keycloak")
+      .getAbsolutePath();
 
-  private final static String KEYCLOAK_BASE_PATH = new File("src/main/docker/keycloak").getAbsolutePath();
-
+  private static final Slf4jLogConsumer logConsumer =
+      new Slf4jLogConsumer(LoggerFactory.getLogger(SongfindApplicationIT.class));
   @Container
   private final static GenericContainer<?> keycloak =
       new GenericContainer<>(DockerImageName.parse("jboss/keycloak:12.0.4"))
@@ -39,15 +38,21 @@ class SongfindApplicationIT {
               "-Dkeycloak.migration.strategy=OVERWRITE_EXISTING",
               "-Djboss.socket.binding.port-offset=1000",
               "-Dkeycloak.profile.feature.upload_scripts=enabled")
-      .withExposedPorts(9080, 9443, 10990)
-      .withLogConsumer(logConsumer)
-      .withFileSystemBind(KEYCLOAK_BASE_PATH + "/realm-config", "/opt/jboss/keycloak/realm-config")
-      .withFileSystemBind(KEYCLOAK_BASE_PATH + "/deploy", "/opt/jboss/keycloak/standalone/deployments")
+          .withExposedPorts(9080, 9443, 10990)
+          .withLogConsumer(logConsumer)
+          .withCopyFileToContainer(MountableFile
+                  .forHostPath(KEYCLOAK_BASE_PATH + "/realm-config/music-realm.json", 0744),
+              "/opt/jboss/keycloak/realm-config/music-realm.json")
+          .withCopyFileToContainer(MountableFile
+                  .forHostPath(KEYCLOAK_BASE_PATH + "/realm-config/music-users-0.json", 0744),
+              "/opt/jboss/keycloak/realm-config/music-users-0.json")
+          .withCopyFileToContainer(
+              MountableFile.forHostPath(KEYCLOAK_BASE_PATH + "/deploy/music.jar", 0744),
+              "/opt/jboss/keycloak/standalone/deployments/music.jar")
       ;
 
   static {
     keycloak.setWaitStrategy(Wait.forHttp("/auth").forPort(9080).forStatusCode(200));
-    LOGGER.info("KEYCLOAK_BASE_PATH has value: " + KEYCLOAK_BASE_PATH);
   }
 
   @DynamicPropertySource
