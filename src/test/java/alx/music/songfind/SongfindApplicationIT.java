@@ -2,6 +2,7 @@ package alx.music.songfind;
 
 import java.io.File;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -17,10 +18,11 @@ import org.testcontainers.utility.DockerImageName;
 @Testcontainers
 class SongfindApplicationIT {
 
+  public static final Logger LOGGER = LoggerFactory.getLogger(SongfindApplicationIT.class);
   private static Slf4jLogConsumer logConsumer =
-      new Slf4jLogConsumer(LoggerFactory.getLogger(SongfindApplicationIT.class));
+      new Slf4jLogConsumer(LOGGER);
 
-  private final static String KEYCLOACK_BASE_PATH  = new File("src/main/docker/keycloak").getAbsolutePath();
+  private final static String KEYCLOAK_BASE_PATH = new File("src/main/docker/keycloak").getAbsolutePath();
 
   @Container
   private final static GenericContainer<?> keycloak =
@@ -39,12 +41,13 @@ class SongfindApplicationIT {
               "-Dkeycloak.profile.feature.upload_scripts=enabled")
       .withExposedPorts(9080, 9443, 10990)
       .withLogConsumer(logConsumer)
-      .withFileSystemBind(KEYCLOACK_BASE_PATH + "/realm-config", "/opt/jboss/keycloak/realm-config")
-      .withFileSystemBind(KEYCLOACK_BASE_PATH + "/deploy", "/opt/jboss/keycloak/standalone/deployments")
+      .withFileSystemBind(KEYCLOAK_BASE_PATH + "/realm-config", "/opt/jboss/keycloak/realm-config")
+      .withFileSystemBind(KEYCLOAK_BASE_PATH + "/deploy", "/opt/jboss/keycloak/standalone/deployments")
       ;
 
   static {
     keycloak.setWaitStrategy(Wait.forHttp("/auth").forPort(9080).forStatusCode(200));
+    LOGGER.info("KEYCLOAK_BASE_PATH has value: " + KEYCLOAK_BASE_PATH);
   }
 
   @DynamicPropertySource
