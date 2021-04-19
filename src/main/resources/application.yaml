@@ -1,6 +1,6 @@
 
 server:
-  port: 8888
+  port: ${PORT:8888}
 
 #logging:
 #  level:
@@ -9,10 +9,10 @@ server:
 #    com.mycompany.myapp: DEBUG
 application:
   client-app:
-    name: songfind
+    name: "@project.name@"
   auth:
     realm: music
-    server: localhost:9080
+    server: ${AUTH_SERVER:localhost:9080}
     audience: "myaudience"
     provider-id: songfind # Has to match spring.security.oauth2.client.registration.{provider-id}
 
@@ -23,14 +23,14 @@ spring:
         registration:
 
           songfind: # this is the provider_id -> has to match ${application.auth.provider-id} value
-            client-id: "@songfind.client.id@"
-            client-secret: "@songfind.client.secret@"
+            client-id: ${AUTH_CLIENT_ID:@songfind.client.id@}
+            client-secret: ${AUTH_CLIENT_SECRET:@songfind.client.secret@}
             scope: openid, spring-front, email, profile
             authorization-grant-type: authorization_code # this could also be password or something else <-- Review/Check
 
           spotify:
-            client-id: "@spotify.client.id@"
-            client-secret: "@spotify.client.secret@"
+            client-id: ${AUTH_SPOTIFY_CLIENT_ID:@spotify.client.id@}
+            client-secret: ${AUT_SPOTIFY_CLIENT_SECRET:@spotify.client.secret@}
             authorization-grant-type: authorization_code
             authentication-scheme: query
             client-authentication-scheme: form
