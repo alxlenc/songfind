@@ -115,6 +115,11 @@
               <artifactId>lombok</artifactId>
             </exclude>
           </excludes>
+          <image>
+            <env>
+              <BP_DEBUG_ENABLED>true</BP_DEBUG_ENABLED>
+            </env>
+          </image>
         </configuration>
       </plugin>
 
