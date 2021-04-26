@@ -28,35 +28,21 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-public class SecurityConfig {
+public class SecurityConfiguration {
 
   @Bean
-  public InMemoryAuditEventRepository repository(){
+  public InMemoryAuditEventRepository repository() {
     return new InMemoryAuditEventRepository();
-  }
-
-  @Configuration
-  @Order(2)
-  public static class ActuatorConfigurationAdapter extends WebSecurityConfigurerAdapter {
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-      http.requestMatchers()
-          .antMatchers("/actuator/health/liveness",
-              "/actuator/health/readiness",
-              "/actuator/auditevents",
-              "/actuator/mappings")
-      .and()
-      .authorizeRequests().anyRequest().permitAll();
-    }
   }
 
   @Bean
   AuthenticationEventPublisher authenticationEventPublisher
       (ApplicationEventPublisher applicationEventPublisher) {
     Map<Class<? extends AuthenticationException>,
-            Class<? extends AbstractAuthenticationFailureEvent>> mapping =
+        Class<? extends AbstractAuthenticationFailureEvent>> mapping =
         Collections
-            .singletonMap(OAuth2AuthenticationException.class, OAuth2AuthenticationExceptionEvent.class);
+            .singletonMap(OAuth2AuthenticationException.class,
+                OAuth2AuthenticationExceptionEvent.class);
     var authenticationEventPublisher =
         new DefaultAuthenticationEventPublisher(applicationEventPublisher);
     authenticationEventPublisher.setAdditionalExceptionMappings(mapping);
@@ -67,6 +53,7 @@ public class SecurityConfig {
   OAuth2AuthorizedClientRepository oauth2AuthorizedClientRepository() {
     return new HttpSessionOAuth2AuthorizedClientRepository();
   }
+
   @Bean
   GrantedAuthoritiesMapper userAuthoritiesMapper() {
     return authorities -> {
@@ -85,6 +72,21 @@ public class SecurityConfig {
       );
       return mappedAuthorities;
     };
+  }
+
+  @Configuration
+  @Order(2)
+  public static class ActuatorConfigurationAdapter extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+      http.requestMatchers()
+          .antMatchers("/actuator/health/liveness",
+              "/actuator/health/readiness",
+              "/actuator/auditevents",
+              "/actuator/mappings")
+          .and()
+          .authorizeRequests().anyRequest().permitAll();
+    }
   }
 
 }
