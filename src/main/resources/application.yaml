@@ -13,7 +13,6 @@ application:
   auth:
     realm: music
     server: ${AUTH_SERVER:http://localhost:9080}
-    cluster-server: ${CLUSTER_AUTH_SERVER:http://127.0.0.1:9080}
     audience: "myaudience"
     provider-id: songfind # Has to match spring.security.oauth2.client.registration.{provider-id}
 
@@ -31,7 +30,7 @@ spring:
 
           spotify:
             client-id: ${AUTH_SPOTIFY_CLIENT_ID:@spotify.client.id@}
-            client-secret: ${AUT_SPOTIFY_CLIENT_SECRET:@spotify.client.secret@}
+            client-secret: ${AUTH_SPOTIFY_CLIENT_SECRET:@spotify.client.secret@}
             authorization-grant-type: authorization_code
             authentication-scheme: query
             client-authentication-scheme: form
@@ -41,8 +40,8 @@ spring:
         provider:
           songfind:
             authorization-uri: ${application.auth.server}/auth/realms/${application.auth.realm}/protocol/openid-connect/auth
-            jwk-set-uri: ${application.auth.cluster-server}/auth/realms/${application.auth.realm}/protocol/openid-connect/certs
-            token-uri: ${application.auth.cluster-server}/auth/realms/${application.auth.realm}/protocol/openid-connect/token
+            jwk-set-uri: ${application.auth.server}/auth/realms/${application.auth.realm}/protocol/openid-connect/certs
+            token-uri: ${application.auth.server}/auth/realms/${application.auth.realm}/protocol/openid-connect/token
             issuer-uri: ${application.auth.server}/auth/realms/${application.auth.realm}
           spotify:
             token-uri: https://accounts.spotify.com/api/token
