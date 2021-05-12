@@ -1,4 +1,4 @@
-package alx.music.songfind.adapter.out.web.spotify.model;
+package alx.music.songfind.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -2,19 +2,16 @@
 server:
   port: ${PORT:8888}
 
-#logging:
-#  level:
-#    ROOT: DEBUG
-#    io.github.jhipster: DEBUG
-#    com.mycompany.myapp: DEBUG
 application:
+  spotify-api:
+    base-url: "https://api.spotify.com"
   client-app:
     name: "@project.name@"
   auth:
     realm: music
     server: ${AUTH_SERVER:http://localhost:9080}
     audience: "myaudience"
-    provider-id: songfind # Has to match spring.security.oauth2.client.registration.{provider-id}
+    provider-id: songfind # Has to match spring.security.oauth2.client.registration.provider.{provider-id}
 
 spring:
   security:
@@ -34,7 +31,7 @@ spring:
             authorization-grant-type: authorization_code
             authentication-scheme: query
             client-authentication-scheme: form
-            scope: user-read-private, user-read-email
+            scope: user-read-private, user-read-email, playlist-read-private
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
 
         provider:

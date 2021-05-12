@@ -3,14 +3,12 @@
 
 <configuration scan="true">
   <include resource="org/springframework/boot/logging/logback/base.xml"/>
-  <logger name="sun.rmi.transport" level="WARN"/>
-  <!-- jhipster-needle-logback-add-log - JHipster will add a new log with level -->
-
-  <logger name="org.springframework.security" level="DEBUG"/>
-  <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter" level="DEBUG" />
-  <logger name="org.springframework.security.web.FilterChainProxy" level="TRACE" />
-  <logger name="org.springframework.security.web.savedrequest.HttpSessionRequestCache" level="TRACE" />
-
+  <!--  <logger name="sun.rmi.transport" level="WARN"/>-->
+  <!--  <logger name="org.springframework.security" level="DEBUG"/>-->
+  <!--  <logger name="org.springframework.web.filter.CommonsRequestLoggingFilter" level="DEBUG" />-->
+  <!--  <logger name="org.springframework.security.web.FilterChainProxy" level="TRACE" />-->
+  <!--  <logger name="org.springframework.security.web.savedrequest.HttpSessionRequestCache" level="TRACE" />-->
+  <logger name="reactor.netty.http.client" level="DEBUG"/>
   <!-- https://logback.qos.ch/manual/configuration.html#shutdownHook and https://jira.qos.ch/browse/LOGBACK-1090 -->
   <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
 

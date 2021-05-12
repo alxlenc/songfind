@@ -1,4 +1,4 @@
-package alx.music.songfind.account;
+package alx.music.songfind.security.account;
 
 import java.io.Serializable;
 import java.util.HashSet;

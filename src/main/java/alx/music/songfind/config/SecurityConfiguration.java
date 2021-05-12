@@ -74,19 +74,6 @@ public class SecurityConfiguration {
     };
   }
 
-  @Configuration
-  @Order(2)
-  public static class ActuatorConfigurationAdapter extends WebSecurityConfigurerAdapter {
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-      http.requestMatchers()
-          .antMatchers("/actuator/health/liveness",
-              "/actuator/health/readiness",
-              "/actuator/auditevents",
-              "/actuator/mappings")
-          .and()
-          .authorizeRequests().anyRequest().permitAll();
-    }
-  }
+
 
 }

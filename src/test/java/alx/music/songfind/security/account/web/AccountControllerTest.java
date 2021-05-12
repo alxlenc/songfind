@@ -1,4 +1,4 @@
-package alx.music.songfind.account.web;
+package alx.music.songfind.security.account.web;
 
 import static java.util.stream.Collectors.toSet;
 import static org.mockito.ArgumentMatchers.any;
@@ -9,9 +9,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import alx.music.songfind.account.AccountService;
-import alx.music.songfind.account.Authority;
-import alx.music.songfind.account.User;
+import alx.music.songfind.security.account.AccountService;
+import alx.music.songfind.security.account.Authority;
+import alx.music.songfind.security.account.User;
 import alx.music.songfind.config.TestSecurityConfiguration;
 import alx.music.songfind.config.WithLoggedInUser;
 import java.security.Principal;
@@ -37,7 +37,7 @@ public class AccountControllerTest {
   private AccountService accountService;
 
   ArgumentCaptor<Principal> principalCaptor;
-  
+
   @Test
   @WithLoggedInUser
   void logout() throws Exception {

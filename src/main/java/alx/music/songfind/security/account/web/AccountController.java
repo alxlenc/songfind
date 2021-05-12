@@ -1,8 +1,8 @@
-package alx.music.songfind.account.web;
+package alx.music.songfind.security.account.web;
 
 
-import alx.music.songfind.account.AccountService;
-import alx.music.songfind.account.User;
+import alx.music.songfind.security.account.AccountService;
+import alx.music.songfind.security.account.User;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;

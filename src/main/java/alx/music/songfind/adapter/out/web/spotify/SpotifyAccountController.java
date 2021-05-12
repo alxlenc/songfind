@@ -1,13 +1,13 @@
-package alx.music.songfind.adapter.spotify;
+package alx.music.songfind.adapter.out.web.spotify;
 
-import alx.music.songfind.adapter.spotify.model.User;
+import alx.music.songfind.adapter.out.web.spotify.model.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/spotify")
-public class SpotifyAccountController {
+class SpotifyAccountController {
 
   private final SpotifyClient spotifyClient;
 

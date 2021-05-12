@@ -32,7 +32,6 @@ import org.zalando.problem.ProblemBuilder;
 import org.zalando.problem.Status;
 import org.zalando.problem.StatusType;
 import org.zalando.problem.spring.web.advice.ProblemHandling;
-import org.zalando.problem.spring.web.advice.security.AuthenticationAdviceTrait;
 import org.zalando.problem.spring.web.advice.security.SecurityAdviceTrait;
 import org.zalando.problem.violations.ConstraintViolationProblem;
 
@@ -50,6 +49,7 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
     private static final String MESSAGE_KEY = "message";
     private static final String PATH_KEY = "path";
     private static final String VIOLATIONS_KEY = "violations";
+    public static final String NOT_AUTHORIZED = "User not authenticated";
 
     @Value("${application.client-app.name}")
     private String applicationName;
@@ -135,7 +135,7 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
     @ExceptionHandler
     public ResponseEntity<Problem> handleClientUnauthorizedException(
         ClientAuthorizationRequiredException ex, NativeWebRequest request) {
-        AuthenticationException authEx = new InsufficientAuthenticationException("My Client not authenticated");
+        AuthenticationException authEx = new InsufficientAuthenticationException(NOT_AUTHORIZED);
         return this.handleAuthentication(authEx, request);
     }
 

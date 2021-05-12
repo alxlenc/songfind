@@ -1,4 +1,4 @@
-package alx.music.songfind.account;
+package alx.music.songfind.security.account;
 
 import alx.music.songfind.config.Constants;
 import java.util.Map;

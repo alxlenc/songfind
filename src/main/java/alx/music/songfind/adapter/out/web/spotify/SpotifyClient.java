@@ -1,10 +1,10 @@
-package alx.music.songfind.adapter.spotify;
+package alx.music.songfind.adapter.out.web.spotify;
 
 
-import alx.music.songfind.adapter.spotify.model.Paginated;
-import alx.music.songfind.adapter.spotify.model.Playlist;
-import alx.music.songfind.adapter.spotify.model.PlaylistTrack;
-import alx.music.songfind.adapter.spotify.model.User;
+import alx.music.songfind.adapter.out.web.spotify.model.Paginated;
+import alx.music.songfind.adapter.out.web.spotify.model.Playlist;
+import alx.music.songfind.adapter.out.web.spotify.model.User;
+import alx.music.songfind.adapter.out.web.spotify.model.PlaylistTrack;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component
-public class SpotifyClient {
+class SpotifyClient {
 
   @Getter
   private final int pageSize = 50;
