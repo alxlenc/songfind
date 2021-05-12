@@ -37,8 +37,7 @@ public class AccountControllerTest {
   private AccountService accountService;
 
   ArgumentCaptor<Principal> principalCaptor;
-
-
+  
   @Test
   @WithLoggedInUser
   void logout() throws Exception {

@@ -1,11 +1,11 @@
-package alx.music.songfind.spotify.web;
+package alx.music.songfind.adapter.spotify;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import alx.music.songfind.adapter.spotify.config.SpotifyConfiguration;
 import alx.music.songfind.config.TestSecurityConfiguration;
-import alx.music.songfind.spotify.config.SpotifyApiConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 
 @WebMvcTest(SpotifyAccountController.class)
-@Import({TestSecurityConfiguration.class, SpotifyApiConfiguration.class})
+@Import({TestSecurityConfiguration.class, SpotifyClient.class, SpotifyConfiguration.class})
 public class SpotifyAccountControllerTest {
 
   @Autowired
