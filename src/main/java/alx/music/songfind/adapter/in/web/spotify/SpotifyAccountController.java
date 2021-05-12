@@ -1,24 +1,23 @@
-package alx.music.songfind.adapter.out.web.spotify;
+package alx.music.songfind.adapter.in.web.spotify;
 
-import alx.music.songfind.adapter.out.web.spotify.model.User;
+import alx.music.songfind.application.port.in.GetUserQuery;
+import alx.music.songfind.domain.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/spotify")
+@RequiredArgsConstructor
 class SpotifyAccountController {
 
-  private final SpotifyClient spotifyClient;
+  private final GetUserQuery userQuery;
 
-  public SpotifyAccountController(
-      SpotifyClient spotifyClient) {
-    this.spotifyClient = spotifyClient;
-  }
 
   @GetMapping("/account")
   public User getSpotifyAccount() {
-    return this.spotifyClient.getCurrentAccount().block();
+    return this.userQuery.getCurrentAccount().block();
   }
 
 }

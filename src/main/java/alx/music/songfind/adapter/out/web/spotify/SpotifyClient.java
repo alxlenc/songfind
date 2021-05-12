@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component
-class SpotifyClient {
+public class SpotifyClient {
 
   @Getter
   private final int pageSize = 50;

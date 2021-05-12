@@ -1,34 +1,28 @@
-package alx.music.songfind.adapter.out.web.spotify;
+package alx.music.songfind.adapter.in.web.spotify;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import alx.music.songfind.adapter.out.web.spotify.config.SpotifyConfiguration;
+import alx.music.songfind.application.port.in.GetUserQuery;
 import alx.music.songfind.config.TestSecurityConfiguration;
-import alx.music.songfind.security.ExceptionTranslator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 
 @WebMvcTest(SpotifyAccountController.class)
-@Import({TestSecurityConfiguration.class, SpotifyClient.class, SpotifyConfiguration.class})
+@Import({TestSecurityConfiguration.class})
 public class SpotifyAccountControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
 
-  @Test
-  @WithMockUser
-  public void authorizedInAppButNotInSpotifyReturnsUnauthorized() throws Exception {
-    this.mockMvc.perform(get("/api/spotify/account"))
-        .andExpect(status().isUnauthorized())
-        .andExpect(jsonPath("$.message").value("Unauthorized: " + ExceptionTranslator.NOT_AUTHORIZED));
-  }
+  @MockBean
+  private GetUserQuery getUserQuery;
+
 
   @Test
   public void unauthorizedRequestReturnsUnauthorized() throws Exception {

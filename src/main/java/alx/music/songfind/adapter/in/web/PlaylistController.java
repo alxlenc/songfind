@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/playlist")
 @RequiredArgsConstructor
-public class PlaylistController {
+class PlaylistController {
 
   private final GetPlaylistQuery playlistQuery;
   private final GetPlaylistTracksQuery playlistTracksQuery;
