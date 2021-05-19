@@ -19,7 +19,7 @@ services:
       ]
     volumes:
       - ./realm-config:/opt/jboss/keycloak/realm-config
-      - ./deploy:/opt/jboss/keycloak/standalone/deployments
+      - ./themes/music:/opt/jboss/keycloak/themes/music
     environment:
       - KEYCLOAK_USER=admin
       - KEYCLOAK_PASSWORD=admin
