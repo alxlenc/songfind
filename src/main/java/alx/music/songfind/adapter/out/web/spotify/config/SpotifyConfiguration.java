@@ -23,6 +23,8 @@ public class SpotifyConfiguration {
         authorizedClientRepository);
     oauth2.setDefaultClientRegistrationId(CLIENT_REGISTRATION_ID);
     return WebClient.builder()
+        .codecs(clientCodecConfigurer -> clientCodecConfigurer.defaultCodecs()
+            .maxInMemorySize(1 * 1024 * 1024))
         .baseUrl(baseUrl)
         .apply(oauth2.oauth2Configuration())
         .build();
