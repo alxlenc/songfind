@@ -20,6 +20,9 @@ public class Track {
   private List<Artist> artists;
   private Integer popularity;
   private ExternalIds externalIds;
+  private ExternalUrl externalUrl;
+  private String previewUrl;
+
   private Album album;
 
   @Data

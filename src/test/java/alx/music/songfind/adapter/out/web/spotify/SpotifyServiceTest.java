@@ -15,7 +15,7 @@ import alx.music.songfind.adapter.out.web.spotify.model.PlaylistTrack;
 import alx.music.songfind.adapter.out.web.spotify.model.PlaylistTrack.PlaylistTrackUser;
 import alx.music.songfind.adapter.out.web.spotify.model.Track;
 import alx.music.songfind.adapter.out.web.spotify.model.User;
-import java.util.Date;
+import java.time.Instant;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -61,7 +61,7 @@ class SpotifyServiceTest {
   @Test
   void getPlaylistTracks() {
     // Arrange
-    Date added = new Date();
+    Instant added = Instant.now();
     String userid = "userid";
     String externalUrl = "spotifyUrl";
     PlaylistTrack plTrack = PlaylistTrack.builder()
@@ -80,7 +80,7 @@ class SpotifyServiceTest {
    StepVerifier.create(actual)
        .expectSubscription()
        .assertNext(playlistTrack -> {
-         assertThat(playlistTrack.getAdded().getTime()).isEqualTo(added.getTime());
+         assertThat(playlistTrack.getAdded().toEpochMilli()).isEqualTo(added.toEpochMilli());
          alx.music.songfind.domain.PlaylistTrack.PlaylistTrackUser addedBy = playlistTrack
              .getAddedBy();
          assertThat(addedBy.getId()).isEqualTo(userid);

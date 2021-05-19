@@ -25,7 +25,10 @@ public class Track {
   @JsonProperty("external_ids")
   private ExternalIds externalIds;
   private Album album;
-
+  @JsonProperty("preview_url")
+  private String previewUrl;
+  @JsonProperty("external_urls")
+  private ExternalUrl externalUrl;
   @Data
   public static class ExternalIds {
     private String isrc;
