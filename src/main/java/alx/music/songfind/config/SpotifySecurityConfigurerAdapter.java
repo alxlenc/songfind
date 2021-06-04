@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 
 @Configuration
@@ -24,12 +23,18 @@ public class SpotifySecurityConfigurerAdapter extends WebSecurityConfigurerAdapt
   }
 
   protected void configure(HttpSecurity http) throws Exception {// @formatter:off
-    RequestMatcher matcher;
+
     http.requestMatchers()
         .antMatchers(SPOTIFY_AUTH_PATHS)
         .and()
+        // Disable SecurityContextPersistenceFilter which allows persisting and restoring of the
+        // SecurityContext found on the SecurityContextHolder for each request to avoid overwriting
+        // Songfind principal
         .securityContext().disable()
-        .sessionManagement().sessionFixation().none().and()
+        .sessionManagement()
+        // Don't create a new session, this would invalidate the oauth client associated to "songfind" (keycloak)
+        .sessionFixation().none()
+        .and()
         .oauth2Client()
         .and()
         .oauth2Login(customizer ->
@@ -41,8 +46,8 @@ public class SpotifySecurityConfigurerAdapter extends WebSecurityConfigurerAdapt
                 .failureUrl("/login/oauth2/authorization/spotify")
         )
         .exceptionHandling()
+        // Use problem support to return 401 codes instead of triggering 302
         .authenticationEntryPoint(problemSupport)
         .accessDeniedHandler(problemSupport);
-    ;
   }
 }

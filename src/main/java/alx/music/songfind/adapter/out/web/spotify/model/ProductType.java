@@ -14,11 +14,9 @@ public enum ProductType {
   private static final Map<String, ProductType> map = new HashMap<>();
 
   static {
-    ProductType[] var0 = values();
-    int var1 = var0.length;
+    ProductType[] productTypes = values();
 
-    for (int var2 = 0; var2 < var1; ++var2) {
-      ProductType productType = var0[var2];
+    for (ProductType productType : productTypes) {
       map.put(productType.type, productType);
     }
 
@@ -26,12 +24,12 @@ public enum ProductType {
 
   public final String type;
 
-  private ProductType(String type) {
+  ProductType(String type) {
     this.type = type;
   }
 
   public static ProductType keyOf(String type) {
-    return (ProductType) map.get(type);
+    return map.get(type);
   }
 
   public String getType() {

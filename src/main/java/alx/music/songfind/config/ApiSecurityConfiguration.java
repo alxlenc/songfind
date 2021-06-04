@@ -4,7 +4,6 @@ import static alx.music.songfind.config.SpotifySecurityConfigurerAdapter.SPOTIFY
 import static java.util.stream.Collectors.toList;
 
 import alx.music.songfind.security.oauth2.AudienceValidator;
-import alx.music.songfind.security.oauth2.JwtGrantedAuthorityConverter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -13,8 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.Order;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -26,7 +23,6 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
@@ -73,13 +69,6 @@ public class ApiSecurityConfiguration {
       this.problemSupport = problemSupport;
     }
 
-    private static Converter<Jwt, AbstractAuthenticationToken> authenticationConverter() {
-      JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-      jwtAuthenticationConverter
-          .setJwtGrantedAuthoritiesConverter(new JwtGrantedAuthorityConverter());
-      return jwtAuthenticationConverter;
-    }
-
     private static Customizer<CorsConfigurer<HttpSecurity>> getCorsConfigurerCustomizer() {
       return c -> {
         CorsConfigurationSource source = request -> {
@@ -120,10 +109,6 @@ public class ApiSecurityConfiguration {
           .accessDeniedHandler(problemSupport)
           .and()
           .oauth2Client()
-          .and()
-          .oauth2ResourceServer()
-          .jwt()
-          .jwtAuthenticationConverter(authenticationConverter())
       ;
 
       http.cors(getCorsConfigurerCustomizer());

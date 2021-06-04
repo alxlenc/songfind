@@ -39,6 +39,7 @@ spring:
             authorization-uri: ${application.auth.server}/auth/realms/${application.auth.realm}/protocol/openid-connect/auth
             jwk-set-uri: ${application.auth.server}/auth/realms/${application.auth.realm}/protocol/openid-connect/certs
             token-uri: ${application.auth.server}/auth/realms/${application.auth.realm}/protocol/openid-connect/token
+            # For OpenId Providers issuer-uri should be the only property required
             issuer-uri: ${application.auth.server}/auth/realms/${application.auth.realm}
           spotify:
             token-uri: https://accounts.spotify.com/api/token
