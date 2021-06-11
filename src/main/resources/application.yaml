@@ -14,6 +14,12 @@ application:
     provider-id: songfind # Has to match spring.security.oauth2.client.registration.provider.{provider-id}
 
 spring:
+  redis:
+    host: ${SPRING_REDIS_HOST:localhost}
+    port: ${SPRING_REDIS_PORT:6379}
+    # password: ${SPRING_REDIS_PASSWORD:password} Disabled while testing
+  session:
+    store-type: redis
   security:
     oauth2:
       client:

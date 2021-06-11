@@ -30,3 +30,10 @@ services:
       - 127.0.0.1:9080:9080
       - 127.0.0.1:9443:9443
       - 127.0.0.1:10990:10990
+
+  store-redis:
+    image: 'redis:6.2.4-alpine'
+    command: redis-server --requirepass password
+    ports:
+      - '6379:6379'
+

@@ -4,6 +4,7 @@ import java.io.File;
 import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.GenericContainer;
@@ -16,6 +17,7 @@ import org.testcontainers.utility.MountableFile;
 
 @SpringBootTest
 @Testcontainers
+@ActiveProfiles("test")
 class SongfindApplicationIT {
 
   private final static String KEYCLOAK_BASE_PATH = new File("src/main/docker/keycloak")
