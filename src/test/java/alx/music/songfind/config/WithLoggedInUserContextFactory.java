@@ -16,10 +16,10 @@ import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.test.context.support.WithSecurityContextFactory;
 
-public class WithLoggedInUserContextFactory implements WithSecurityContextFactory<WithLoggedInUser> {
+public class WithLoggedInUserContextFactory implements WithSecurityContextFactory<WithLoggedUser> {
 
   @Override
-  public SecurityContext createSecurityContext(WithLoggedInUser withLoggedInUser) {
+  public SecurityContext createSecurityContext(WithLoggedUser withLoggedUser) {
     Collection<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(
         AuthoritiesConstants.ADMIN));
     Instant issuedAt = Instant.now();

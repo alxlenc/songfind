@@ -13,7 +13,7 @@ import alx.music.songfind.security.account.AccountService;
 import alx.music.songfind.security.account.Authority;
 import alx.music.songfind.security.account.User;
 import alx.music.songfind.config.TestSecurityConfiguration;
-import alx.music.songfind.config.WithLoggedInUser;
+import alx.music.songfind.config.WithLoggedUser;
 import java.security.Principal;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
@@ -39,7 +39,7 @@ public class AccountControllerTest {
   ArgumentCaptor<Principal> principalCaptor;
 
   @Test
-  @WithLoggedInUser
+  @WithLoggedUser
   void logout() throws Exception {
 
     this.mockMvc.perform(post("/api/logout")

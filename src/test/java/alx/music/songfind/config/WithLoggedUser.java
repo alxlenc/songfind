@@ -13,6 +13,6 @@ import org.springframework.security.test.context.support.WithSecurityContext;
 @Inherited
 @Documented
 @WithSecurityContext( factory = WithLoggedInUserContextFactory.class)
-public @interface WithLoggedInUser {
+public @interface WithLoggedUser {
 
 }

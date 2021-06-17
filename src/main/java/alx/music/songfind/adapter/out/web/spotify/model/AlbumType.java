@@ -1,6 +1,6 @@
 package alx.music.songfind.adapter.out.web.spotify.model;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,11 +24,11 @@ public enum AlbumType {
     this.type = type;
   }
 
+  @JsonCreator
   public static AlbumType keyOf(String type) {
-    return map.get(type);
+    return map.get(type.toLowerCase());
   }
 
-  @JsonValue
   public String getType() {
     return type;
   }

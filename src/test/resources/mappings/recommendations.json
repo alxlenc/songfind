@@ -1,0 +1,431 @@
+{
+  "request": {
+    "urlPath": "/v1/recommendations",
+    "method": "GET",
+    "queryParameters": {
+      "seed_artists": {
+        "equalTo": "5bHjVR4F2Tfq4Ha6x7K6wU"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "tracks": [
+        {
+          "album": {
+            "album_type": "ALBUM",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/5lmSBamD6zMcpHPqPpwmwN"
+                },
+                "href": "https://api.spotify.com/v1/artists/5lmSBamD6zMcpHPqPpwmwN",
+                "id": "5lmSBamD6zMcpHPqPpwmwN",
+                "name": "Disney Peaceful Piano",
+                "type": "artist",
+                "uri": "spotify:artist:5lmSBamD6zMcpHPqPpwmwN"
+              },
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/3xvaSlT4xsyk6lY1ESOspO"
+                },
+                "href": "https://api.spotify.com/v1/artists/3xvaSlT4xsyk6lY1ESOspO",
+                "id": "3xvaSlT4xsyk6lY1ESOspO",
+                "name": "Disney",
+                "type": "artist",
+                "uri": "spotify:artist:3xvaSlT4xsyk6lY1ESOspO"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/2CE8v99s07pcaXQwOLYMlS"
+            },
+            "href": "https://api.spotify.com/v1/albums/2CE8v99s07pcaXQwOLYMlS",
+            "id": "2CE8v99s07pcaXQwOLYMlS",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2731583ba08b7ae37d290344fb0",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e021583ba08b7ae37d290344fb0",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048511583ba08b7ae37d290344fb0",
+                "width": 64
+              }
+            ],
+            "name": "Disney Peaceful Piano: Lullaby",
+            "release_date": "2018-11-16",
+            "release_date_precision": "day",
+            "total_tracks": 8,
+            "type": "album",
+            "uri": "spotify:album:2CE8v99s07pcaXQwOLYMlS"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5lmSBamD6zMcpHPqPpwmwN"
+              },
+              "href": "https://api.spotify.com/v1/artists/5lmSBamD6zMcpHPqPpwmwN",
+              "id": "5lmSBamD6zMcpHPqPpwmwN",
+              "name": "Disney Peaceful Piano",
+              "type": "artist",
+              "uri": "spotify:artist:5lmSBamD6zMcpHPqPpwmwN"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/3xvaSlT4xsyk6lY1ESOspO"
+              },
+              "href": "https://api.spotify.com/v1/artists/3xvaSlT4xsyk6lY1ESOspO",
+              "id": "3xvaSlT4xsyk6lY1ESOspO",
+              "name": "Disney",
+              "type": "artist",
+              "uri": "spotify:artist:3xvaSlT4xsyk6lY1ESOspO"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 167055,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "USWD11890615"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/1h9sbBtqXjji9nnBsxaxNR"
+          },
+          "href": "https://api.spotify.com/v1/tracks/1h9sbBtqXjji9nnBsxaxNR",
+          "id": "1h9sbBtqXjji9nnBsxaxNR",
+          "is_local": false,
+          "is_playable": true,
+          "name": "Beauty and the Beast",
+          "popularity": 54,
+          "preview_url": null,
+          "track_number": 3,
+          "type": "track",
+          "uri": "spotify:track:1h9sbBtqXjji9nnBsxaxNR"
+        },
+        {
+          "album": {
+            "album_type": "SINGLE",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/1qLLwwu9lK9xJZBxBlLQxF"
+                },
+                "href": "https://api.spotify.com/v1/artists/1qLLwwu9lK9xJZBxBlLQxF",
+                "id": "1qLLwwu9lK9xJZBxBlLQxF",
+                "name": "Jonathan Simons",
+                "type": "artist",
+                "uri": "spotify:artist:1qLLwwu9lK9xJZBxBlLQxF"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/62iLAjPYUFwgSDOF51S9P5"
+            },
+            "href": "https://api.spotify.com/v1/albums/62iLAjPYUFwgSDOF51S9P5",
+            "id": "62iLAjPYUFwgSDOF51S9P5",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2735f587e269b6a7df02fa9cb2e",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e025f587e269b6a7df02fa9cb2e",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048515f587e269b6a7df02fa9cb2e",
+                "width": 64
+              }
+            ],
+            "name": "Alouette",
+            "release_date": "2020-01-06",
+            "release_date_precision": "day",
+            "total_tracks": 2,
+            "type": "album",
+            "uri": "spotify:album:62iLAjPYUFwgSDOF51S9P5"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1qLLwwu9lK9xJZBxBlLQxF"
+              },
+              "href": "https://api.spotify.com/v1/artists/1qLLwwu9lK9xJZBxBlLQxF",
+              "id": "1qLLwwu9lK9xJZBxBlLQxF",
+              "name": "Jonathan Simons",
+              "type": "artist",
+              "uri": "spotify:artist:1qLLwwu9lK9xJZBxBlLQxF"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 117314,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "QZAKB1910889"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/6oUWWupUtsIAtc821IZPaH"
+          },
+          "href": "https://api.spotify.com/v1/tracks/6oUWWupUtsIAtc821IZPaH",
+          "id": "6oUWWupUtsIAtc821IZPaH",
+          "is_local": false,
+          "is_playable": true,
+          "name": "Alouette",
+          "popularity": 50,
+          "preview_url": "https://p.scdn.co/mp3-preview/dcf2dcd2d8dbe896519371d3967361bd323b36be?cid=774b29d4f13844c495f206cafdad9c86",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:6oUWWupUtsIAtc821IZPaH"
+        },
+        {
+          "album": {
+            "album_type": "ALBUM",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/0qPfO5FCAsfqK3pgqBSAJR"
+                },
+                "href": "https://api.spotify.com/v1/artists/0qPfO5FCAsfqK3pgqBSAJR",
+                "id": "0qPfO5FCAsfqK3pgqBSAJR",
+                "name": "Fred Mollin",
+                "type": "artist",
+                "uri": "spotify:artist:0qPfO5FCAsfqK3pgqBSAJR"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/3diwNCScanKXsiDgO1Etxn"
+            },
+            "href": "https://api.spotify.com/v1/albums/3diwNCScanKXsiDgO1Etxn",
+            "id": "3diwNCScanKXsiDgO1Etxn",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273765074b1f53beb4623df329e",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02765074b1f53beb4623df329e",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851765074b1f53beb4623df329e",
+                "width": 64
+              }
+            ],
+            "name": "Princess Lullaby: Soothing Instrumental Lullabies For Little Princesses",
+            "release_date": "2002",
+            "release_date_precision": "year",
+            "total_tracks": 12,
+            "type": "album",
+            "uri": "spotify:album:3diwNCScanKXsiDgO1Etxn"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/0qPfO5FCAsfqK3pgqBSAJR"
+              },
+              "href": "https://api.spotify.com/v1/artists/0qPfO5FCAsfqK3pgqBSAJR",
+              "id": "0qPfO5FCAsfqK3pgqBSAJR",
+              "name": "Fred Mollin",
+              "type": "artist",
+              "uri": "spotify:artist:0qPfO5FCAsfqK3pgqBSAJR"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 242573,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "USWD10220278"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/09eEn3vbwXzrfnTJOhYLWC"
+          },
+          "href": "https://api.spotify.com/v1/tracks/09eEn3vbwXzrfnTJOhYLWC",
+          "id": "09eEn3vbwXzrfnTJOhYLWC",
+          "is_local": false,
+          "is_playable": true,
+          "name": "Just Around The Riverbend",
+          "popularity": 51,
+          "preview_url": null,
+          "track_number": 11,
+          "type": "track",
+          "uri": "spotify:track:09eEn3vbwXzrfnTJOhYLWC"
+        },
+        {
+          "album": {
+            "album_type": "SINGLE",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/6iOLm48O5U4bvtK6igOuqK"
+                },
+                "href": "https://api.spotify.com/v1/artists/6iOLm48O5U4bvtK6igOuqK",
+                "id": "6iOLm48O5U4bvtK6igOuqK",
+                "name": "Martina Beasley",
+                "type": "artist",
+                "uri": "spotify:artist:6iOLm48O5U4bvtK6igOuqK"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/4mfBTTRG4J79mxLmEnHhc7"
+            },
+            "href": "https://api.spotify.com/v1/albums/4mfBTTRG4J79mxLmEnHhc7",
+            "id": "4mfBTTRG4J79mxLmEnHhc7",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273bcecf40bf87fffe8e2c1b392",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02bcecf40bf87fffe8e2c1b392",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851bcecf40bf87fffe8e2c1b392",
+                "width": 64
+              }
+            ],
+            "name": "Hannah My Nana",
+            "release_date": "2021-01-29",
+            "release_date_precision": "day",
+            "total_tracks": 1,
+            "type": "album",
+            "uri": "spotify:album:4mfBTTRG4J79mxLmEnHhc7"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6iOLm48O5U4bvtK6igOuqK"
+              },
+              "href": "https://api.spotify.com/v1/artists/6iOLm48O5U4bvtK6igOuqK",
+              "id": "6iOLm48O5U4bvtK6igOuqK",
+              "name": "Martina Beasley",
+              "type": "artist",
+              "uri": "spotify:artist:6iOLm48O5U4bvtK6igOuqK"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 93000,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "SE5W32100260"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/1sDjxNFyypPdv3SuHb8tSB"
+          },
+          "href": "https://api.spotify.com/v1/tracks/1sDjxNFyypPdv3SuHb8tSB",
+          "id": "1sDjxNFyypPdv3SuHb8tSB",
+          "is_local": false,
+          "is_playable": true,
+          "name": "Hannah My Nana",
+          "popularity": 64,
+          "preview_url": "https://p.scdn.co/mp3-preview/8e69ffc8eb1eb2b8ea0de275f8e36f648a7574bf?cid=774b29d4f13844c495f206cafdad9c86",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:1sDjxNFyypPdv3SuHb8tSB"
+        },
+        {
+          "album": {
+            "album_type": "SINGLE",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/68VsLtvEAEljBp5OAXOpCL"
+                },
+                "href": "https://api.spotify.com/v1/artists/68VsLtvEAEljBp5OAXOpCL",
+                "id": "68VsLtvEAEljBp5OAXOpCL",
+                "name": "Julio Menzel",
+                "type": "artist",
+                "uri": "spotify:artist:68VsLtvEAEljBp5OAXOpCL"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/0Ud73bc5ouySkkxcE4iFE1"
+            },
+            "href": "https://api.spotify.com/v1/albums/0Ud73bc5ouySkkxcE4iFE1",
+            "id": "0Ud73bc5ouySkkxcE4iFE1",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2734ac3e7d928a93e366543905f",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e024ac3e7d928a93e366543905f",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048514ac3e7d928a93e366543905f",
+                "width": 64
+              }
+            ],
+            "name": "Dormir",
+            "release_date": "2020-03-26",
+            "release_date_precision": "day",
+            "total_tracks": 2,
+            "type": "album",
+            "uri": "spotify:album:0Ud73bc5ouySkkxcE4iFE1"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/68VsLtvEAEljBp5OAXOpCL"
+              },
+              "href": "https://api.spotify.com/v1/artists/68VsLtvEAEljBp5OAXOpCL",
+              "id": "68VsLtvEAEljBp5OAXOpCL",
+              "name": "Julio Menzel",
+              "type": "artist",
+              "uri": "spotify:artist:68VsLtvEAEljBp5OAXOpCL"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 87124,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "SE5IB2000497"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/2Dk44WpbC5w791Tdw5Zcnm"
+          },
+          "href": "https://api.spotify.com/v1/tracks/2Dk44WpbC5w791Tdw5Zcnm",
+          "id": "2Dk44WpbC5w791Tdw5Zcnm",
+          "is_local": false,
+          "is_playable": true,
+          "name": "London Bridge",
+          "popularity": 55,
+          "preview_url": "https://p.scdn.co/mp3-preview/922192916fe4b9bcb64ef8b49455d942f48bf8fb?cid=774b29d4f13844c495f206cafdad9c86",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:2Dk44WpbC5w791Tdw5Zcnm"
+        }
+      ],
+      "seeds": [
+        {
+          "initialPoolSize": 250,
+          "afterFilteringSize": 85,
+          "afterRelinkingSize": 85,
+          "id": "5bHjVR4F2Tfq4Ha6x7K6wU",
+          "type": "ARTIST",
+          "href": "https://api.spotify.com/v1/artists/5bHjVR4F2Tfq4Ha6x7K6wU"
+        }
+      ]
+    }
+  }
+}
