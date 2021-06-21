@@ -1,10 +1,15 @@
 package alx.music.songfind.adapter.out.web.spotify;
 
+import alx.music.songfind.adapter.out.web.spotify.mapper.ArtistMapper;
 import alx.music.songfind.adapter.out.web.spotify.mapper.PlaylistMapper;
 import alx.music.songfind.adapter.out.web.spotify.mapper.PlaylistTrackMapper;
 import alx.music.songfind.adapter.out.web.spotify.mapper.UserMapper;
+import alx.music.songfind.adapter.out.web.spotify.model.Paginated;
+import alx.music.songfind.adapter.out.web.spotify.model.SearchResults;
 import alx.music.songfind.application.port.out.GetPLaylistPort;
 import alx.music.songfind.application.port.out.GetUserPort;
+import alx.music.songfind.application.port.out.SearchArtistPort;
+import alx.music.songfind.domain.Artist;
 import alx.music.songfind.domain.Playlist;
 import alx.music.songfind.domain.PlaylistTrack;
 import alx.music.songfind.domain.User;
@@ -15,13 +20,14 @@ import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-class SpotifyService implements GetPLaylistPort, GetUserPort {
+class SpotifyService implements GetPLaylistPort, GetUserPort, SearchArtistPort {
 
   private final SpotifyClient spotifyClient;
   private final SpotifyPaginatedResourcePublisher paginatedPublisher;
   private final PlaylistMapper playlistMapper;
   private final PlaylistTrackMapper playlistTrackMapper;
   private final UserMapper userMapper;
+  private final ArtistMapper artistMapper;
 
   @Override
   public Mono<User> getCurrentAccount() {
@@ -40,6 +46,14 @@ class SpotifyService implements GetPLaylistPort, GetUserPort {
     return this.paginatedPublisher
         .publish((offset) -> this.spotifyClient.getPlaylistTracks(offset, playlistId))
         .map(this.playlistTrackMapper::toDomain);
+
+  }
+
+  @Override
+  public Flux<Artist> searchArtists(String name, int limit) {
+    return this.spotifyClient.searchArtists(name, limit).map(SearchResults::getArtists)
+        .flatMapIterable(Paginated::getItems)
+        .map(this.artistMapper::toDomain);
 
   }
 }

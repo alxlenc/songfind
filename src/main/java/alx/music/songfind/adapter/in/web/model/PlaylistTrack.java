@@ -12,7 +12,7 @@ public class PlaylistTrack {
   private String addedBy;
   private Integer duration;
   private Integer popularity;
-  private List<Artists> artists;
+  private List<Artist> artists;
   private String previewUrl;
   private String externalUrl;
 

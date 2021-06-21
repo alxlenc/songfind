@@ -1,4 +1,4 @@
-package alx.music.songfind.application;
+package alx.music.songfind.application.service;
 
 import alx.music.songfind.application.port.in.GetRecommendationsCommand;
 import alx.music.songfind.application.port.in.GetRecommendationsQuery;

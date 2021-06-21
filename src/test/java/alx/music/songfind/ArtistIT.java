@@ -1,6 +1,7 @@
 package alx.music.songfind;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import alx.music.songfind.config.ConfigureMockMvcWiremockIT;
@@ -10,17 +11,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 
 @ConfigureMockMvcWiremockIT
-class RecommendationsIT {
+public class ArtistIT {
 
   @Autowired
   private MockMvc mockMvc;
 
   @Test
   @WithLoggedUser
-  public void getRecommendations() throws Exception {
-    this.mockMvc.perform(get("/api/recommendations")
-        .param("seed_artists", "5bHjVR4F2Tfq4Ha6x7K6wU")
-    ).andExpect(status().isOk());
+  void searchForArtists() throws Exception {
+
+    this.mockMvc.perform(get("/api/artist").param("query", "Smash")).andExpect(
+        status().isOk())
+        .andExpect(jsonPath("$[0].id").value("08td7MxkoHQkXnWAYD8d6Q"))
+        .andExpect(jsonPath("$[0].name").value("Smashing Pumpkins"))
+        ;
   }
 
 }

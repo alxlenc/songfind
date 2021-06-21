@@ -3,6 +3,8 @@ server:
   port: ${PORT:8888}
 
 application:
+  artist:
+    max-search-results: 5
   spotify-api:
     base-url: "https://api.spotify.com"
   client-app:

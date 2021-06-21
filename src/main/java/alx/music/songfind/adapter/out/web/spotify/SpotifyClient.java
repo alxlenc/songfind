@@ -1,10 +1,13 @@
 package alx.music.songfind.adapter.out.web.spotify;
 
 
+import static alx.music.songfind.adapter.out.web.spotify.model.SearchType.ARTIST;
+
 import alx.music.songfind.adapter.out.web.spotify.model.Paginated;
 import alx.music.songfind.adapter.out.web.spotify.model.Playlist;
 import alx.music.songfind.adapter.out.web.spotify.model.PlaylistTrack;
 import alx.music.songfind.adapter.out.web.spotify.model.Recommendations;
+import alx.music.songfind.adapter.out.web.spotify.model.SearchResults;
 import alx.music.songfind.adapter.out.web.spotify.model.User;
 import alx.music.songfind.application.port.in.GetRecommendationsCommand;
 import lombok.Getter;
@@ -56,5 +59,13 @@ public class SpotifyClient {
     return this.webClient.get().uri(uriBuilder -> uriBuilder.path("/v1/recommendations")
     .queryParam("seed_artists", params.getArtistIds().toArray())
     .build()).retrieve().bodyToMono(Recommendations.class);
+  }
+
+  public Mono<SearchResults> searchArtists(String name, int limit) {
+    return this.webClient.get().uri(uriBuilder -> uriBuilder.path("/v1/search")
+      .queryParam("q", name)
+      .queryParam("type", ARTIST.getType())
+      .queryParam("limit", limit)
+    .build()).retrieve().bodyToMono(SearchResults.class);
   }
 }

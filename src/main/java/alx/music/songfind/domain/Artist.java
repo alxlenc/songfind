@@ -1,11 +1,11 @@
 package alx.music.songfind.domain;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class Artist {
-  public String id;
-  public String name;
+  private final String id;
+  private final String name;
 }

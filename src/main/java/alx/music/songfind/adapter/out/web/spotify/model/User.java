@@ -1,7 +1,6 @@
 package alx.music.songfind.adapter.out.web.spotify.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
-import com.neovisionaries.i18n.CountryCode;
 import java.util.Collections;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -17,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class User {
 
   private String birthdate;
-  private CountryCode country;
+  private String country;
   @JsonAlias("display_name")
   private String name;
   private String email;
