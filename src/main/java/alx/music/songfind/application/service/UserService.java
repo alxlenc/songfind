@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements GetUserQuery {
+class UserService implements GetUserQuery {
 
   private final GetUserPort getUserPort;
 

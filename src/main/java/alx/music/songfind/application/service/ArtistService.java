@@ -10,7 +10,7 @@ import reactor.core.publisher.Flux;
 
 @Service
 @RequiredArgsConstructor
-public class ArtistService implements SearchArtistQuery {
+class ArtistService implements SearchArtistQuery {
 
   private final SearchArtistPort searchArtistPort;
   @Value("${application.artist.max-search-results}")
