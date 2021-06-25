@@ -1,5 +1,7 @@
-package alx.music.songfind.security.account;
+package alx.music.songfind.adapter.in.web.mapper;
 
+import alx.music.songfind.adapter.in.web.model.Authority;
+import alx.music.songfind.adapter.in.web.model.User;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,12 +12,12 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.stereotype.Service;
 
 @Service
-public class AccountService {
+public class SecurityMapper {
 
   public User getUserFromAuthentication(AbstractAuthenticationToken authToken) {
-    Map<String, Object> attributes = getAttributes(authToken);
-    User user = parseUser(attributes);
-    user.setAuthorities(extractAuthorities(authToken));
+    Map<String, Object> attributes = this.getAttributes(authToken);
+    User user = this.parseUser(attributes);
+    user.setAuthorities(this.extractAuthorities(authToken));
     return user;
   }
 
@@ -68,7 +70,6 @@ public class AccountService {
     user.setActivated(true);
     return user;
   }
-
 
 
   private Set<Authority> extractAuthorities(AbstractAuthenticationToken authToken) {

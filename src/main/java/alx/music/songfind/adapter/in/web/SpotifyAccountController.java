@@ -1,4 +1,4 @@
-package alx.music.songfind.adapter.in.web.spotify;
+package alx.music.songfind.adapter.in.web;
 
 import alx.music.songfind.application.port.in.GetUserQuery;
 import alx.music.songfind.domain.User;

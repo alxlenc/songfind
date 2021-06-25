@@ -1,4 +1,4 @@
-package alx.music.songfind.security.account;
+package alx.music.songfind.adapter.in.web.model;
 
 import java.io.Serializable;
 import lombok.Data;
@@ -10,8 +10,8 @@ import lombok.Data;
 @Data
 public class Authority implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private final String name;
+  private final String name;
 
 }

@@ -1,4 +1,4 @@
-package alx.music.songfind.security.account.web;
+package alx.music.songfind.adapter.in.web;
 
 import static java.util.stream.Collectors.toSet;
 import static org.mockito.ArgumentMatchers.any;
@@ -9,9 +9,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import alx.music.songfind.security.account.AccountService;
-import alx.music.songfind.security.account.Authority;
-import alx.music.songfind.security.account.User;
+import alx.music.songfind.adapter.in.web.mapper.SecurityMapper;
+import alx.music.songfind.adapter.in.web.model.Authority;
+import alx.music.songfind.adapter.in.web.model.User;
 import alx.music.songfind.config.TestSecurityConfiguration;
 import alx.music.songfind.config.WithLoggedUser;
 import java.security.Principal;
@@ -34,7 +34,7 @@ public class AccountControllerTest {
   private MockMvc mockMvc;
 
   @MockBean
-  private AccountService accountService;
+  private SecurityMapper securityMapper;
 
   ArgumentCaptor<Principal> principalCaptor;
 
@@ -43,7 +43,7 @@ public class AccountControllerTest {
   void logout() throws Exception {
 
     this.mockMvc.perform(post("/api/logout")
-                          .with(csrf()))
+        .with(csrf()))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.logoutUrl").value(TestSecurityConfiguration.END_SESSION_ENDPOINT))
         .andExpect(jsonPath("$.idToken").isString());
@@ -66,11 +66,12 @@ public class AccountControllerTest {
         .collect(toSet());
     user.setAuthorities(authorities);
 
-    when(this.accountService.getUserFromAuthentication(any(AbstractAuthenticationToken.class))).thenReturn(user);
+    when(this.securityMapper.getUserFromAuthentication(any(AbstractAuthenticationToken.class)))
+        .thenReturn(user);
 
     this.mockMvc.perform(get("/api/account"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.firstName").value("Alice"));
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.firstName").value("Alice"));
   }
 
   @Test

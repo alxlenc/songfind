@@ -1,8 +1,8 @@
-package alx.music.songfind.security.account.web;
+package alx.music.songfind.adapter.in.web;
 
 
-import alx.music.songfind.security.account.AccountService;
-import alx.music.songfind.security.account.User;
+import alx.music.songfind.adapter.in.web.mapper.SecurityMapper;
+import alx.music.songfind.adapter.in.web.model.User;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,17 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class  AccountController {
+class AccountController {
 
   public static final String END_SESSION_ENDPOINT = "end_session_endpoint";
-  private final AccountService accountService;
+  private final SecurityMapper securityMapper;
 
   private final ClientRegistration registration;
 
 
-  public AccountController(AccountService accountService,
+  public AccountController(SecurityMapper securityMapper,
       ClientRegistrationRepository registrations) {
-    this.accountService = accountService;
+    this.securityMapper = securityMapper;
     this.registration = registrations.findByRegistrationId("songfind");
   }
 
@@ -39,10 +39,12 @@ public class  AccountController {
    *
    * @param request the {@link HttpServletRequest}.
    * @param idToken the ID token.
-   * @return the {@link ResponseEntity} with status {@code 200 (OK)} and a body with a global logout URL and ID token.
+   * @return the {@link ResponseEntity} with status {@code 200 (OK)} and a body with a global logout
+   * URL and ID token.
    */
   @PostMapping("/logout")
-  public ResponseEntity<?> logout(HttpServletRequest request, @AuthenticationPrincipal(expression = "idToken") OidcIdToken idToken) {
+  public ResponseEntity<?> logout(HttpServletRequest request,
+      @AuthenticationPrincipal(expression = "idToken") OidcIdToken idToken) {
 
     String logoutUrl = this.registration.getProviderDetails().getConfigurationMetadata().get(
         END_SESSION_ENDPOINT).toString();
@@ -56,7 +58,7 @@ public class  AccountController {
 
   @GetMapping("/account")
   public User getAccount(Principal principal) {
-    return accountService.getUserFromAuthentication((AbstractAuthenticationToken) principal);
+    return this.securityMapper.getUserFromAuthentication((AbstractAuthenticationToken) principal);
   }
 
 }
