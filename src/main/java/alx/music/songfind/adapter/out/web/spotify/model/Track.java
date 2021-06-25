@@ -29,8 +29,10 @@ public class Track {
   private String previewUrl;
   @JsonProperty("external_urls")
   private ExternalUrl externalUrl;
+
   @Data
   public static class ExternalIds {
+
     private String isrc;
   }
 

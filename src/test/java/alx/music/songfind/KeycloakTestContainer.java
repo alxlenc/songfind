@@ -16,7 +16,8 @@ public class KeycloakTestContainer {
       new Slf4jLogConsumer(LoggerFactory.getLogger(SongfindApplicationIT.class));
 
   static GenericContainer<?> getWithContainerWithDevConfig(int internalHttpPort) {
-    GenericContainer<?> keycloakContainer = new GenericContainer<>(DockerImageName.parse("jboss/keycloak:12.0.4"))
+    GenericContainer<?> keycloakContainer = new GenericContainer<>(
+        DockerImageName.parse("jboss/keycloak:12.0.4"))
         .withEnv("KEYCLOAK_USER", "admin")
         .withEnv("KEYCLOAK_PASSWORD", "admin")
         .withEnv("DB_VENDOR", "h2")
@@ -40,7 +41,8 @@ public class KeycloakTestContainer {
         .withCopyFileToContainer(
             MountableFile.forHostPath(KEYCLOAK_BASE_PATH + "/deploy/music.jar", 0744),
             "/opt/jboss/keycloak/standalone/deployments/music.jar");
-    keycloakContainer.setWaitStrategy(Wait.forHttp("/auth").forPort(internalHttpPort).forStatusCode(200));
+    keycloakContainer
+        .setWaitStrategy(Wait.forHttp("/auth").forPort(internalHttpPort).forStatusCode(200));
     return keycloakContainer;
   }
 }

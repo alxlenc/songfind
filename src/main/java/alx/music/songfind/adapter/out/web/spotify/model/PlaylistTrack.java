@@ -25,6 +25,7 @@ public class PlaylistTrack {
   @AllArgsConstructor
   @NoArgsConstructor
   public static class PlaylistTrackUser {
+
     private String id;
     @JsonProperty("external_urls")
     private ExternalUrl externalUrl;

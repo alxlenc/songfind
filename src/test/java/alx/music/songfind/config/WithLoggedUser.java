@@ -12,7 +12,7 @@ import org.springframework.security.test.context.support.WithSecurityContext;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-@WithSecurityContext( factory = WithLoggedInUserContextFactory.class)
+@WithSecurityContext(factory = WithLoggedInUserContextFactory.class)
 public @interface WithLoggedUser {
 
 }

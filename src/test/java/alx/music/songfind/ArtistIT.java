@@ -24,7 +24,7 @@ public class ArtistIT {
         status().isOk())
         .andExpect(jsonPath("$[0].id").value("08td7MxkoHQkXnWAYD8d6Q"))
         .andExpect(jsonPath("$[0].name").value("Smashing Pumpkins"))
-        ;
+    ;
   }
 
 }

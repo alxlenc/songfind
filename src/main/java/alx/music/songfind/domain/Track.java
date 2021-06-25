@@ -27,6 +27,7 @@ public class Track {
 
   @Data
   public static class ExternalIds {
+
     private String isrc;
   }
 

@@ -26,60 +26,62 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  */
 public class CustomClaimConverter implements Converter<Map<String, Object>, Map<String, Object>> {
 
-    private final BearerTokenResolver bearerTokenResolver = new DefaultBearerTokenResolver();
+  private final BearerTokenResolver bearerTokenResolver = new DefaultBearerTokenResolver();
 
-    private final MappedJwtClaimSetConverter delegate = MappedJwtClaimSetConverter.withDefaults(Collections.emptyMap());
+  private final MappedJwtClaimSetConverter delegate = MappedJwtClaimSetConverter
+      .withDefaults(Collections.emptyMap());
 
-    private final RestTemplate restTemplate;
+  private final RestTemplate restTemplate;
 
-    private final ClientRegistration registration;
+  private final ClientRegistration registration;
 
-    private final Map<String, ObjectNode> users = new HashMap<>();
+  private final Map<String, ObjectNode> users = new HashMap<>();
 
-    public CustomClaimConverter(ClientRegistration registration, RestTemplate restTemplate) {
-        this.registration = registration;
-        this.restTemplate = restTemplate;
-    }
+  public CustomClaimConverter(ClientRegistration registration, RestTemplate restTemplate) {
+    this.registration = registration;
+    this.restTemplate = restTemplate;
+  }
 
-    public Map<String, Object> convert(Map<String, Object> claims) {
-        Map<String, Object> convertedClaims = this.delegate.convert(claims);
-        if (RequestContextHolder.getRequestAttributes() != null) {
-            // Retrieve and set the token
-            String token = bearerTokenResolver.resolve(
-                ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest()
-            );
-            HttpHeaders headers = new HttpHeaders() {
-                {
-                    set("Authorization", "Bearer " + token);
-                }
-            };
-
-            // Retrieve user infos from OAuth provider if not already loaded
-            ObjectNode user = users.computeIfAbsent(
-                claims.get("sub").toString(),
-                s -> {
-                    ResponseEntity<ObjectNode> userInfo = restTemplate.exchange(
-                        registration.getProviderDetails().getUserInfoEndpoint().getUri(),
-                        HttpMethod.GET,
-                        new HttpEntity<String>(headers),
-                        ObjectNode.class
-                    );
-                    return userInfo.getBody();
-                }
-            );
-
-            // Add custom claims
-            if (user != null) {
-                convertedClaims.put("preferred_username", user.get("preferred_username").asText());
-                convertedClaims.put("given_name", user.get("given_name").asText());
-                convertedClaims.put("family_name", user.get("family_name").asText());
-                List<String> groups = StreamSupport
-                    .stream(user.get("groups").spliterator(), false)
-                    .map(JsonNode::asText)
-                    .collect(Collectors.toList());
-                convertedClaims.put("groups", groups);
-            }
+  @Override
+  public Map<String, Object> convert(Map<String, Object> claims) {
+    Map<String, Object> convertedClaims = this.delegate.convert(claims);
+    if (RequestContextHolder.getRequestAttributes() != null) {
+      // Retrieve and set the token
+      String token = this.bearerTokenResolver.resolve(
+          ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest()
+      );
+      HttpHeaders headers = new HttpHeaders() {
+        {
+          this.set("Authorization", "Bearer " + token);
         }
-        return convertedClaims;
+      };
+
+      // Retrieve user infos from OAuth provider if not already loaded
+      ObjectNode user = this.users.computeIfAbsent(
+          claims.get("sub").toString(),
+          s -> {
+            ResponseEntity<ObjectNode> userInfo = this.restTemplate.exchange(
+                this.registration.getProviderDetails().getUserInfoEndpoint().getUri(),
+                HttpMethod.GET,
+                new HttpEntity<String>(headers),
+                ObjectNode.class
+            );
+            return userInfo.getBody();
+          }
+      );
+
+      // Add custom claims
+      if (user != null) {
+        convertedClaims.put("preferred_username", user.get("preferred_username").asText());
+        convertedClaims.put("given_name", user.get("given_name").asText());
+        convertedClaims.put("family_name", user.get("family_name").asText());
+        List<String> groups = StreamSupport
+            .stream(user.get("groups").spliterator(), false)
+            .map(JsonNode::asText)
+            .collect(Collectors.toList());
+        convertedClaims.put("groups", groups);
+      }
     }
+    return convertedClaims;
+  }
 }

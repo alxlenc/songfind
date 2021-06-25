@@ -11,23 +11,25 @@ import org.springframework.util.Assert;
 
 public class AudienceValidator implements OAuth2TokenValidator<Jwt> {
 
-    private final Logger log = LoggerFactory.getLogger(AudienceValidator.class);
-    private final OAuth2Error error = new OAuth2Error("invalid_token", "The required audience is missing", null);
+  private final Logger log = LoggerFactory.getLogger(AudienceValidator.class);
+  private final OAuth2Error error = new OAuth2Error("invalid_token",
+      "The required audience is missing", null);
 
-    private final List<String> allowedAudience;
+  private final List<String> allowedAudience;
 
-    public AudienceValidator(List<String> allowedAudience) {
-        Assert.notEmpty(allowedAudience, "Allowed audience should not be null or empty.");
-        this.allowedAudience = allowedAudience;
+  public AudienceValidator(List<String> allowedAudience) {
+    Assert.notEmpty(allowedAudience, "Allowed audience should not be null or empty.");
+    this.allowedAudience = allowedAudience;
+  }
+
+  @Override
+  public OAuth2TokenValidatorResult validate(Jwt jwt) {
+    List<String> audience = jwt.getAudience();
+    if (audience.stream().anyMatch(this.allowedAudience::contains)) {
+      return OAuth2TokenValidatorResult.success();
+    } else {
+      this.log.warn("Invalid audience: {}", audience);
+      return OAuth2TokenValidatorResult.failure(this.error);
     }
-
-    public OAuth2TokenValidatorResult validate(Jwt jwt) {
-        List<String> audience = jwt.getAudience();
-        if (audience.stream().anyMatch(allowedAudience::contains)) {
-            return OAuth2TokenValidatorResult.success();
-        } else {
-            log.warn("Invalid audience: {}", audience);
-            return OAuth2TokenValidatorResult.failure(error);
-        }
-    }
+  }
 }

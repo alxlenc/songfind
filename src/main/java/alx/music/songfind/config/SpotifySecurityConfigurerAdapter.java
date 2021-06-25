@@ -22,7 +22,8 @@ public class SpotifySecurityConfigurerAdapter extends WebSecurityConfigurerAdapt
     this.problemSupport = problemSupport;
   }
 
-  protected void configure(HttpSecurity http) throws Exception {// @formatter:off
+  @Override
+  protected void configure(HttpSecurity http) throws Exception { // @formatter:off
 
     http.requestMatchers()
         .antMatchers(SPOTIFY_AUTH_PATHS)
@@ -31,7 +32,8 @@ public class SpotifySecurityConfigurerAdapter extends WebSecurityConfigurerAdapt
         // to avoid overwriting Songfind principal with Soptify's principal
         .securityContext().disable()
         .sessionManagement()
-        // Don't create a new session, this would invalidate the oauth client associated to "songfind" (keycloak)
+        // Don't create a new session, this would invalidate the oauth client associated
+        // to "songfind" (keycloak)
         .sessionFixation().none()
         .and()
         .oauth2Client()
@@ -46,7 +48,7 @@ public class SpotifySecurityConfigurerAdapter extends WebSecurityConfigurerAdapt
         )
         .exceptionHandling()
         // Use problem support to return 401 codes instead of triggering 302
-        .authenticationEntryPoint(problemSupport)
-        .accessDeniedHandler(problemSupport);
+        .authenticationEntryPoint(this.problemSupport)
+        .accessDeniedHandler(this.problemSupport);
   }
 }

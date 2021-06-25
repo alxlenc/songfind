@@ -10,7 +10,6 @@ class SpotifyClientTest {
   private SpotifyClient sut;
 
 
-
   @Test
   void getPlaylistTracks() {
   }

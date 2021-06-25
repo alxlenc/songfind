@@ -27,7 +27,8 @@ public class WithLoggedInUserContextFactory implements WithSecurityContextFactor
     Map<String, Object> claims = Map.of("roles", List.of("ROLE_USER"), "sub", "songfind");
     OidcIdToken idToken = new OidcIdToken("fake", issuedAt, expiresAt, claims);
     OAuth2User principal = new DefaultOidcUser(authorities, idToken);
-    Authentication authentication = new OAuth2AuthenticationToken(principal, authorities, "songfind");
+    Authentication authentication = new OAuth2AuthenticationToken(principal, authorities,
+        "songfind");
     SecurityContext context = SecurityContextHolder.createEmptyContext();
     context.setAuthentication(authentication);
     return context;

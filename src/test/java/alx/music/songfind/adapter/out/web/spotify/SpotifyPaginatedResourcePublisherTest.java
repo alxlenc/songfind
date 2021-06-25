@@ -54,12 +54,12 @@ class SpotifyPaginatedResourcePublisherTest {
     var p3 = Paginated.<Integer>builder()
         .items(List.of(7)).limit(pageSize).total(totalElements).build();
 
-    when(integerProvider.apply(0)).thenReturn(Mono.just(p1));
-    when(integerProvider.apply(3)).thenReturn(Mono.just(p2));
-    when(integerProvider.apply(6)).thenReturn(Mono.just(p3));
+    when(this.integerProvider.apply(0)).thenReturn(Mono.just(p1));
+    when(this.integerProvider.apply(3)).thenReturn(Mono.just(p2));
+    when(this.integerProvider.apply(6)).thenReturn(Mono.just(p3));
 
     // Act
-    Flux<Integer> integerFlux = sut.publish(integerProvider);
+    Flux<Integer> integerFlux = this.sut.publish(this.integerProvider);
 
     // Assert
     StepVerifier.create(integerFlux)
@@ -67,7 +67,7 @@ class SpotifyPaginatedResourcePublisherTest {
         .recordWith(ArrayList::new)
         .expectNextCount(7)
         .consumeRecordedWith(items ->
-            assertThat(items).containsSequence(1,2,3,4,5,6,7))
+            assertThat(items).containsSequence(1, 2, 3, 4, 5, 6, 7))
         .verifyComplete();
 
   }

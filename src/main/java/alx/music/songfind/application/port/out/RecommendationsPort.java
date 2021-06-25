@@ -5,6 +5,6 @@ import alx.music.songfind.domain.Recommendations;
 
 public interface RecommendationsPort {
 
-  public Recommendations getRecoRecommendations(GetRecommendationsCommand params);
+  Recommendations getRecoRecommendations(GetRecommendationsCommand params);
 
 }

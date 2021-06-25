@@ -11,7 +11,7 @@ import reactor.core.publisher.Flux;
 
 @Service
 @RequiredArgsConstructor
-public class ArtistAdapter implements SearchArtistPort {
+class ArtistAdapter implements SearchArtistPort {
 
   private final SpotifyClient spotifyClient;
   private final ArtistMapper artistMapper;

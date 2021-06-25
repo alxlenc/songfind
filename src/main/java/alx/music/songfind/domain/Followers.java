@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Followers {
 
-  private  String href;
-  private  Integer total;
+  private String href;
+  private Integer total;
 }

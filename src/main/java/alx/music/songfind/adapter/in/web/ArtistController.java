@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/artist")
-public class ArtistController {
+class ArtistController {
 
   private final SearchArtistQuery searchArtistQuery;
 
   @GetMapping
   public List<Artist> searchArtist(@RequestParam String query) {
-    return searchArtistQuery.searchArtist(query).collectList().block();
+    return this.searchArtistQuery.searchArtist(query).collectList().block();
   }
 
 }

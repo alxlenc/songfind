@@ -20,6 +20,7 @@ public class PlaylistTrack {
   @Data
   @NoArgsConstructor
   public static class PlaylistTrackUser {
+
     private String id;
     private ExternalUrl externalUrl;
   }

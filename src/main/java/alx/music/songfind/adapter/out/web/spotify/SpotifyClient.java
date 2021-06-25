@@ -26,7 +26,7 @@ public class SpotifyClient {
   private final int pageSize = 50;
   private final WebClient webClient;
 
-  public SpotifyClient(final WebClient webClient) {
+  public SpotifyClient(WebClient webClient) {
     this.webClient = webClient;
   }
 
@@ -49,23 +49,23 @@ public class SpotifyClient {
   public Mono<Paginated<PlaylistTrack>> getPlaylistTracks(int offset, String playlistId) {
     return this.webClient.get().uri(uriBuilder ->
         uriBuilder.path("/v1/playlists/{playlistId}/tracks")
-        .queryParam("offset", String.valueOf(offset))
-        .build(playlistId))
+            .queryParam("offset", String.valueOf(offset))
+            .build(playlistId))
         .retrieve().bodyToMono(new ParameterizedTypeReference<Paginated<PlaylistTrack>>() {
         });
   }
 
   public Mono<Recommendations> getRecommendations(GetRecommendationsCommand params) {
     return this.webClient.get().uri(uriBuilder -> uriBuilder.path("/v1/recommendations")
-    .queryParam("seed_artists", params.getArtistIds().toArray())
-    .build()).retrieve().bodyToMono(Recommendations.class);
+        .queryParam("seed_artists", params.getArtistIds().toArray())
+        .build()).retrieve().bodyToMono(Recommendations.class);
   }
 
   public Mono<SearchResults> searchArtists(String name, int limit) {
     return this.webClient.get().uri(uriBuilder -> uriBuilder.path("/v1/search")
-      .queryParam("q", name)
-      .queryParam("type", ARTIST.getType())
-      .queryParam("limit", limit)
-    .build()).retrieve().bodyToMono(SearchResults.class);
+        .queryParam("q", name)
+        .queryParam("type", ARTIST.getType())
+        .queryParam("limit", limit)
+        .build()).retrieve().bodyToMono(SearchResults.class);
   }
 }

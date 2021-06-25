@@ -19,6 +19,7 @@ public class Playlist {
 
   @Data
   public static class TracksInfo {
-     private Integer total;
+
+    private Integer total;
   }
 }

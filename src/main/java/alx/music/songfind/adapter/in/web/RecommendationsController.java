@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/recommendations")
 @RequiredArgsConstructor
-public class RecommendationsController {
+class RecommendationsController {
 
   private final GetRecommendationsQuery getRecommendationsQuery;
   private final RecommendationsViewModelMapper mapper;

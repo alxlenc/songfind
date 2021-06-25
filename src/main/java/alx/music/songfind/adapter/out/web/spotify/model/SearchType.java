@@ -1,8 +1,7 @@
 package alx.music.songfind.adapter.out.web.spotify.model;
 
 public enum SearchType {
-  ARTIST("artist")
-  ;
+  ARTIST("artist");
 
   SearchType(String type) {
     this.type = type;
@@ -11,6 +10,6 @@ public enum SearchType {
   private final String type;
 
   public String getType() {
-    return type;
+    return this.type;
   }
 }

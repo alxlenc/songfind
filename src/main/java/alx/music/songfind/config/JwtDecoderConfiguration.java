@@ -22,7 +22,7 @@ public class JwtDecoderConfiguration {
   JwtDecoder jwtDecoder(
       @Value("${spring.security.oauth2.client.provider.songfind.issuer-uri}") String issuerUri,
       @Value("${application.auth.audience}") String applicationAudience) {
-    NimbusJwtDecoder jwtDecoder = (NimbusJwtDecoder) JwtDecoders
+    NimbusJwtDecoder jwtDecoder = JwtDecoders
         .fromOidcIssuerLocation(issuerUri);
     OAuth2TokenValidator<Jwt> audienceValidator = new AudienceValidator(
         Arrays.asList(applicationAudience.split(",")));
