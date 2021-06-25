@@ -1,42 +1,26 @@
 package alx.music.songfind.adapter.out.web.spotify;
 
-import alx.music.songfind.adapter.out.web.spotify.mapper.ArtistMapper;
 import alx.music.songfind.adapter.out.web.spotify.mapper.PlaylistMapper;
 import alx.music.songfind.adapter.out.web.spotify.mapper.PlaylistTrackMapper;
-import alx.music.songfind.adapter.out.web.spotify.mapper.UserMapper;
-import alx.music.songfind.adapter.out.web.spotify.model.Paginated;
-import alx.music.songfind.adapter.out.web.spotify.model.SearchResults;
 import alx.music.songfind.application.port.out.GetPLaylistPort;
-import alx.music.songfind.application.port.out.GetUserPort;
-import alx.music.songfind.application.port.out.SearchArtistPort;
-import alx.music.songfind.domain.Artist;
 import alx.music.songfind.domain.Playlist;
 import alx.music.songfind.domain.PlaylistTrack;
-import alx.music.songfind.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-class SpotifyService implements GetPLaylistPort, GetUserPort, SearchArtistPort {
+class PlaylistAdapter implements GetPLaylistPort {
 
   private final SpotifyClient spotifyClient;
   private final SpotifyPaginatedResourcePublisher paginatedPublisher;
   private final PlaylistMapper playlistMapper;
   private final PlaylistTrackMapper playlistTrackMapper;
-  private final UserMapper userMapper;
-  private final ArtistMapper artistMapper;
-
-  @Override
-  public Mono<User> getCurrentAccount() {
-    return this.spotifyClient.getCurrentAccount().map(this.userMapper::toDomain);
-  }
 
   @Override
   public Flux<Playlist> getCurrentUserPlaylists() {
-    return paginatedPublisher
+    return this.paginatedPublisher
         .publish(this.spotifyClient::getCurrentUserPlaylists)
         .map(this.playlistMapper::toDomain);
   }
@@ -49,11 +33,4 @@ class SpotifyService implements GetPLaylistPort, GetUserPort, SearchArtistPort {
 
   }
 
-  @Override
-  public Flux<Artist> searchArtists(String name, int limit) {
-    return this.spotifyClient.searchArtists(name, limit).map(SearchResults::getArtists)
-        .flatMapIterable(Paginated::getItems)
-        .map(this.artistMapper::toDomain);
-
-  }
 }
