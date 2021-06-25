@@ -1,6 +1,5 @@
 package alx.music.songfind.security.account;
 
-import alx.music.songfind.config.Constants;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -61,7 +60,7 @@ public class AccountService {
       user.setLangKey(locale.toLowerCase());
     } else {
       // set langKey to default if not specified by IdP
-      user.setLangKey(Constants.DEFAULT_LANGUAGE);
+      user.setLangKey("en");
     }
     if (details.get("picture") != null) {
       user.setImageUrl((String) details.get("picture"));

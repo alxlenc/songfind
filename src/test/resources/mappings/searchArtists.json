@@ -7,7 +7,7 @@
         "equalTo": "Smash"
       },
       "limit": {
-        "equalTo": "10"
+        "matches": "[0-9].*"
       }
     }
   },

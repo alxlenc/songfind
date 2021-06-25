@@ -27,9 +27,8 @@ public class SpotifySecurityConfigurerAdapter extends WebSecurityConfigurerAdapt
     http.requestMatchers()
         .antMatchers(SPOTIFY_AUTH_PATHS)
         .and()
-        // Disable SecurityContextPersistenceFilter which allows persisting and restoring of the
-        // SecurityContext found on the SecurityContextHolder for each request to avoid overwriting
-        // Songfind principal
+        // Disable SecurityContextPersistenceFilter which persists and restores the SecurityContext
+        // to avoid overwriting Songfind principal with Soptify's principal
         .securityContext().disable()
         .sessionManagement()
         // Don't create a new session, this would invalidate the oauth client associated to "songfind" (keycloak)

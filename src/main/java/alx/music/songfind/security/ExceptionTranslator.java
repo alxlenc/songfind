@@ -121,15 +121,6 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
     }
 
     @ExceptionHandler
-    public ResponseEntity<Problem> handleBadRequestAlertException(BadRequestAlertException ex, NativeWebRequest request) {
-        return create(
-            ex,
-            request,
-            createFailureAlert(applicationName, false, ex.getEntityName(), ex.getErrorKey(), ex.getMessage())
-        );
-    }
-
-    @ExceptionHandler
     public ResponseEntity<Problem> handleClientUnauthorizedException(
         ClientAuthorizationRequiredException ex, NativeWebRequest request) {
         AuthenticationException authEx = new InsufficientAuthenticationException(NOT_AUTHORIZED);
