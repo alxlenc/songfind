@@ -1,16 +1,14 @@
 package alx.music.songfind.domain;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@Getter
 public class Album {
 
-  private AlbumType type;
+  private final AlbumType type;
+
+  public Album(AlbumType type) {
+    this.type = type;
+  }
 }

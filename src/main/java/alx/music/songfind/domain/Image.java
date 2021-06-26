@@ -1,19 +1,22 @@
 package alx.music.songfind.domain;
 
-import javax.annotation.Nonnull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+import lombok.Getter;
+
+@Getter
 public class Image {
 
+  private final String url;
   private int width;
   private int height;
-  @Nonnull
-  private String url;
+
+  public Image(String url) {
+    this.url = url;
+  }
+
+  public Image(String url, int width, int height) {
+    this.url = url;
+    this.width = width;
+    this.height = height;
+  }
 }

@@ -3,6 +3,7 @@ package alx.music.songfind.adapter.out.web.spotify;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import alx.music.songfind.adapter.out.web.spotify.mapper.ImageMapperImpl;
 import alx.music.songfind.adapter.out.web.spotify.mapper.UserMapper;
 import alx.music.songfind.adapter.out.web.spotify.mapper.UserMapperImpl;
 import alx.music.songfind.adapter.out.web.spotify.model.User;
@@ -21,7 +22,7 @@ class UserAdapterTest {
   @InjectMocks
   private UserAdapter sut;
   @Spy
-  private final UserMapper userMapper = new UserMapperImpl();
+  private final UserMapper userMapper = new UserMapperImpl(new ImageMapperImpl());
   @Mock
   private SpotifyClient spotifyClient;
 
@@ -31,7 +32,7 @@ class UserAdapterTest {
     User user = User.builder().id("uid").name("spotify-username").build();
     when(this.spotifyClient.getCurrentAccount()).thenReturn(Mono.just(user));
     // Act
-    Mono<alx.music.songfind.domain.User> actual = sut.getCurrentAccount();
+    Mono<alx.music.songfind.domain.User> actual = this.sut.getCurrentAccount();
     // Assert
     StepVerifier.create(actual)
         .expectSubscription()

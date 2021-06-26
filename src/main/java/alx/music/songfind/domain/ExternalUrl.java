@@ -1,9 +1,14 @@
 package alx.music.songfind.domain;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class ExternalUrl {
 
-  private String spotify;
+
+  private final String spotify;
+
+  public ExternalUrl(String spotify) {
+    this.spotify = spotify;
+  }
 }

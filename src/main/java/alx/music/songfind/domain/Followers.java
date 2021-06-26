@@ -1,12 +1,15 @@
 package alx.music.songfind.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
-@NoArgsConstructor
+@Getter
 public class Followers {
 
-  private String href;
-  private Integer total;
+  private final String href;
+  private final Integer total;
+
+  public Followers(String href, Integer total) {
+    this.href = href;
+    this.total = total;
+  }
 }

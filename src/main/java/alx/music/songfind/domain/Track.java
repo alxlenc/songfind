@@ -1,34 +1,40 @@
 package alx.music.songfind.domain;
 
-
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Setter
+@Getter
 public class Track {
 
-  private String id;
-  private String name;
-  private Integer duration;
+  private final String id;
+  private final String name;
+  private final Integer duration;
+  private final List<Artist> artists;
   private Integer trackNumber;
-  private List<Artist> artists;
   private Integer popularity;
   private ExternalIds externalIds;
   private ExternalUrl externalUrl;
   private String previewUrl;
-
   private Album album;
 
-  @Data
+  public Track(String id, String name, Integer duration,
+      List<Artist> artists) {
+    this.id = id;
+    this.name = name;
+    this.duration = duration;
+    this.artists = artists;
+  }
+
+  @Getter
   public static class ExternalIds {
 
-    private String isrc;
+    private final String isrc;
+
+    public ExternalIds(String isrc) {
+      this.isrc = isrc;
+    }
   }
 
 }

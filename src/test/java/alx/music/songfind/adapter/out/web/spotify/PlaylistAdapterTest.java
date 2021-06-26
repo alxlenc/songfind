@@ -4,10 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import alx.music.songfind.adapter.out.web.spotify.mapper.ImageMapperImpl;
 import alx.music.songfind.adapter.out.web.spotify.mapper.PlaylistMapper;
 import alx.music.songfind.adapter.out.web.spotify.mapper.PlaylistMapperImpl;
 import alx.music.songfind.adapter.out.web.spotify.mapper.PlaylistTrackMapper;
 import alx.music.songfind.adapter.out.web.spotify.mapper.PlaylistTrackMapperImpl;
+import alx.music.songfind.adapter.out.web.spotify.mapper.TrackMapperImpl;
 import alx.music.songfind.adapter.out.web.spotify.model.ExternalUrl;
 import alx.music.songfind.adapter.out.web.spotify.model.PlaylistTrack;
 import alx.music.songfind.adapter.out.web.spotify.model.PlaylistTrack.PlaylistTrackUser;
@@ -25,13 +27,13 @@ import reactor.test.StepVerifier;
 @ExtendWith(MockitoExtension.class)
 class PlaylistAdapterTest {
 
+  @Spy
+  private final PlaylistMapper playlistMapper = new PlaylistMapperImpl(new ImageMapperImpl());
+  @Spy
+  private final PlaylistTrackMapper playlistTrackMapper = new PlaylistTrackMapperImpl(
+      new TrackMapperImpl());
   @InjectMocks
   private PlaylistAdapter sut;
-
-  @Spy
-  private final PlaylistMapper playlistMapper = new PlaylistMapperImpl();
-  @Spy
-  private final PlaylistTrackMapper playlistTrackMapper = new PlaylistTrackMapperImpl();
   @Mock
   private SpotifyClient spotifyClient;
   @Mock
@@ -45,7 +47,9 @@ class PlaylistAdapterTest {
     String externalUrl = "spotifyUrl";
     PlaylistTrack plTrack = PlaylistTrack.builder()
         .track(
-            Track.builder().name("track1").build()
+            Track.builder()
+                .id("1234HHH")
+                .name("track1").build()
         ).added(added)
         .addedBy(new PlaylistTrackUser(userid, new ExternalUrl(externalUrl)))
         .build();

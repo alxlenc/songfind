@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 import alx.music.songfind.application.port.out.GetPLaylistPort;
 import alx.music.songfind.domain.Image;
 import alx.music.songfind.domain.Playlist;
+import alx.music.songfind.domain.Playlist.TracksInfo;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,16 +30,17 @@ class PlaylistServiceTest {
   void given_playlists_with_unsorted_sorted_image_sizes_then_sort_with_success() {
 
     List<Image> images = List.of(
-        Image.builder().width(1).url("url").build(),
-        Image.builder().width(3).url("url").build(),
-        Image.builder().width(2).url("url").build(),
-        Image.builder().url("nowidth").build()
+        new Image("url", 1, 1),
+        new Image("url", 3, 1),
+        new Image("url", 2, 1),
+        new Image("url")
     );
-    Playlist pl = Playlist.builder().id("pl1").images(images).build();
+    Playlist pl = new Playlist("pl1", "my playlist", new TracksInfo(10));
+    pl.setImages(images);
 
-    when(getPLaylistPort.getCurrentUserPlaylists()).thenReturn(Flux.just(pl));
+    when(this.getPLaylistPort.getCurrentUserPlaylists()).thenReturn(Flux.just(pl));
 
-    Flux<alx.music.songfind.domain.Playlist> actual = sut
+    Flux<alx.music.songfind.domain.Playlist> actual = this.sut
         .getCurrentUserPlaylists();
 
     StepVerifier.create(actual)

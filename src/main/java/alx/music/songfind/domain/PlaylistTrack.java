@@ -1,28 +1,33 @@
 package alx.music.songfind.domain;
 
 import java.time.Instant;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter
 public class PlaylistTrack {
 
-  private Instant added;
-  private PlaylistTrackUser addedBy;
-  private Track track;
 
+  private final Track track;
+  private final Instant added;
+  private final PlaylistTrackUser addedBy;
 
-  @Data
-  @NoArgsConstructor
+  public PlaylistTrack(Track track, Instant added,
+      PlaylistTrackUser addedBy) {
+    this.track = track;
+    this.added = added;
+    this.addedBy = addedBy;
+  }
+
+  @Getter
   public static class PlaylistTrackUser {
 
-    private String id;
-    private ExternalUrl externalUrl;
+    private final String id;
+    private final ExternalUrl externalUrl;
+
+    public PlaylistTrackUser(String id, ExternalUrl externalUrl) {
+      this.id = id;
+      this.externalUrl = externalUrl;
+    }
   }
 
 }

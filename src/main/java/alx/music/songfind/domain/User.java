@@ -2,25 +2,31 @@ package alx.music.songfind.domain;
 
 import java.util.Collections;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter
+@Setter
 public class User {
 
+
+  private final String id;
+  private final String name;
+  private final String email;
   private String birthdate;
   private String country;
-  private String name;
-  private String email;
   private Followers followers;
   private String href;
-  private String id;
   private List<Image> images = Collections.emptyList();
   private String uri;
+
+  public User(String id, String name, String email) {
+    this.id = id;
+    this.name = name;
+    this.email = email;
+  }
+
+  public void setImages(List<Image> images) {
+    this.images = images != null ? images : Collections.emptyList();
+  }
 }
