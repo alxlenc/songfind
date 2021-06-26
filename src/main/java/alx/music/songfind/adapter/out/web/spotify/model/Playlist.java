@@ -21,5 +21,6 @@ public class Playlist {
   public static class TracksInfo {
 
     private Integer total;
+    
   }
 }
