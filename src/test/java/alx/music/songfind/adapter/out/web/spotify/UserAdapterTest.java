@@ -17,24 +17,27 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 @ExtendWith(MockitoExtension.class)
-class UserAdapterTest {
+public class UserAdapterTest {
 
   @InjectMocks
   private UserAdapter sut;
+
   @Spy
   private final UserMapper userMapper = new UserMapperImpl(new ImageMapperImpl());
+
   @Mock
   private SpotifyClient spotifyClient;
 
   @Test
-  void getCurrentAccount() {
+  void getCurrentAccountReturnsOk() {
     // Arrange
     User user = User.builder().id("uid").name("spotify-username").build();
     when(this.spotifyClient.getCurrentAccount()).thenReturn(Mono.just(user));
     // Act
     Mono<alx.music.songfind.domain.User> actual = this.sut.getCurrentAccount();
-    // Assert
+
     StepVerifier.create(actual)
+        // Assert
         .expectSubscription()
         .assertNext(u -> assertThat(u.getName()).isEqualTo("spotify-username"))
         .verifyComplete();

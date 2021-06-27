@@ -17,6 +17,8 @@ import org.springframework.test.web.servlet.MockMvc;
 @Import({TestSecurityConfiguration.class})
 public class SpotifyAccountControllerTest {
 
+  private static final String SPOTIFY_ACCOUNT_RESOURCE = "/api/spotify/account";
+  
   @Autowired
   private MockMvc mockMvc;
 
@@ -25,7 +27,7 @@ public class SpotifyAccountControllerTest {
 
   @Test
   public void unauthorizedRequestReturnsUnauthorized() throws Exception {
-    this.mockMvc.perform(get("/api/spotify/account"))
+    this.mockMvc.perform(get(SPOTIFY_ACCOUNT_RESOURCE))
         .andExpect(status().isUnauthorized());
   }
 

@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 
 @ConfigureMockMvcWiremockIT
-class RecommendationsIT {
+public class RecommendationsIT {
 
   @Autowired
   private MockMvc mockMvc;

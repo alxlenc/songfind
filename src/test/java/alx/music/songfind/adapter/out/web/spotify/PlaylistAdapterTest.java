@@ -25,22 +25,24 @@ import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
 @ExtendWith(MockitoExtension.class)
-class PlaylistAdapterTest {
+public class PlaylistAdapterTest {
 
-  @Spy
-  private final PlaylistMapper playlistMapper = new PlaylistMapperImpl(new ImageMapperImpl());
-  @Spy
-  private final PlaylistTrackMapper playlistTrackMapper = new PlaylistTrackMapperImpl(
-      new TrackMapperImpl());
   @InjectMocks
   private PlaylistAdapter sut;
+
+  @Spy
+  final PlaylistMapper playlistMapper = new PlaylistMapperImpl(new ImageMapperImpl());
+  @Spy
+  final PlaylistTrackMapper playlistTrackMapper = new PlaylistTrackMapperImpl(
+      new TrackMapperImpl());
+
   @Mock
   private SpotifyClient spotifyClient;
   @Mock
   private SpotifyPaginatedResourcePublisher publisher;
 
   @Test
-  void getPlaylistTracks() {
+  void getPlaylistTracksReturnsOk() {
     // Arrange
     Instant added = Instant.now();
     String userid = "userid";
@@ -59,11 +61,13 @@ class PlaylistAdapterTest {
     // Act
     Flux<alx.music.songfind.domain.PlaylistTrack> actual = this.sut.getPlaylistTracks("playlistId");
 
-    //Assert
     StepVerifier.create(actual)
         .expectSubscription()
+        //Assert
         .assertNext(playlistTrack -> {
+
           assertThat(playlistTrack.getAdded().toEpochMilli()).isEqualTo(added.toEpochMilli());
+
           alx.music.songfind.domain.PlaylistTrack.PlaylistTrackUser addedBy = playlistTrack
               .getAddedBy();
           assertThat(addedBy.getId()).isEqualTo(userid);

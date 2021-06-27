@@ -25,8 +25,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(RecommendationsController.class)
 @Import(TestSecurityConfiguration.class)
-class RecommendationsControllerTest {
+public class RecommendationsControllerTest {
 
+  private static final String RECOMMENDATIONS_RESOURCE = "/api/recommendations";
+  
   @Autowired
   private MockMvc mockMvc;
 
@@ -40,25 +42,25 @@ class RecommendationsControllerTest {
   private ArgumentCaptor<GetRecommendationsCommand> commandCaptor;
 
   @Test
-  void getRecommendationsByPlaylistWithUnauthorizedUser() throws Exception {
-    this.mockMvc.perform(get("/api/recommendations"))
+  void unauthorizedGetRecommendationsByPlaylistReturnsUnauthorized() throws Exception {
+    this.mockMvc.perform(get(RECOMMENDATIONS_RESOURCE))
         .andExpect(status().isUnauthorized());
   }
 
   @Test
   @WithLoggedUser
-  void getRecommendationsForArtistsWithIds() throws Exception {
+  void getRecommendationsForArtistsWithIdsReturnsOk() throws Exception {
 
-    when(getRecommendationsQuery.getRecommendations(any())).thenReturn(new Recommendations(
+    when(this.getRecommendationsQuery.getRecommendations(any())).thenReturn(new Recommendations(
         Collections.emptyList(), Collections.emptyList()));
 
-    this.mockMvc.perform(get("/api/recommendations")
+    this.mockMvc.perform(get(RECOMMENDATIONS_RESOURCE)
         .param("seed_artists", "1", "2", "3"))
         .andExpect(status().isOk());
 
-    verify(getRecommendationsQuery).getRecommendations(commandCaptor.capture());
+    verify(this.getRecommendationsQuery).getRecommendations(this.commandCaptor.capture());
 
-    Assertions.assertThat(commandCaptor.getValue().getArtistIds()).contains("1", "2", "3");
+    Assertions.assertThat(this.commandCaptor.getValue().getArtistIds()).contains("1", "2", "3");
 
   }
 

@@ -19,9 +19,10 @@ import reactor.core.publisher.Flux;
 
 @WebMvcTest(ArtistController.class)
 @Import(TestSecurityConfiguration.class)
-class ArtistControllerTest {
+public class ArtistControllerTest {
 
-  public static final String ARTIST_RESOURCE = "/api/artist";
+  private final String ARTIST_RESOURCE = "/api/artist";
+  
   @Autowired
   private MockMvc mockMvc;
 
@@ -29,21 +30,21 @@ class ArtistControllerTest {
   private SearchArtistQuery searchArtistQuery;
 
   @Test
-  void searchArtistNotLoggedReturnsUnauthorized() throws Exception {
-    this.mockMvc.perform(get(ARTIST_RESOURCE).param("query", "anything"))
+  void unauthorizedGetArtistReturnsUnauthorized() throws Exception {
+    this.mockMvc.perform(get(this.ARTIST_RESOURCE).param("query", "anything"))
         .andExpect(status().isUnauthorized());
   }
 
   @Test
   @WithLoggedUser
-  void searchArtist() throws Exception {
+  void getArtistsReturnsOk() throws Exception {
 
-    final Artist artist1 = new Artist("id1", "Smashing Pumpkins");
-    final Artist artist2 = new Artist("id2", "Smash Mouth");
+    Artist artist1 = new Artist("id1", "Smashing Pumpkins");
+    Artist artist2 = new Artist("id2", "Smash Mouth");
     final String query = "Smash";
     when(this.searchArtistQuery.searchArtist(query)).thenReturn(Flux.just(artist1, artist2));
 
-    this.mockMvc.perform(get(ARTIST_RESOURCE)
+    this.mockMvc.perform(get(this.ARTIST_RESOURCE)
         .param("query", query))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$[0].id").value(artist1.getId()))

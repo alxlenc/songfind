@@ -7,6 +7,7 @@ import alx.music.songfind.application.port.out.GetPLaylistPort;
 import alx.music.songfind.domain.Image;
 import alx.music.songfind.domain.Playlist;
 import alx.music.songfind.domain.Playlist.TracksInfo;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,39 +18,40 @@ import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
 @ExtendWith(MockitoExtension.class)
-class PlaylistServiceTest {
-
-
-  @Mock
-  GetPLaylistPort getPLaylistPort;
+public class PlaylistServiceTest {
 
   @InjectMocks
   PlaylistService sut;
 
-  @Test
-  void given_playlists_with_unsorted_sorted_image_sizes_then_sort_with_success() {
+  @Mock
+  GetPLaylistPort getPLaylistPort;
 
-    List<Image> images = List.of(
-        new Image("url", 1, 1),
-        new Image("url", 3, 1),
-        new Image("url", 2, 1),
-        new Image("url")
-    );
+  @Test
+  void getPlaylistWithUnsortedImagesReturnsPlaylistWithSortedImages() {
+
+    // Arrange
+    List<Image> images = this.getImagesWithOrderByWidth(1, 3, 2, null);
     Playlist pl = new Playlist("pl1", "my playlist", new TracksInfo(10));
     pl.setImages(images);
 
     when(this.getPLaylistPort.getCurrentUserPlaylists()).thenReturn(Flux.just(pl));
 
+    // Act
     Flux<alx.music.songfind.domain.Playlist> actual = this.sut
         .getCurrentUserPlaylists();
 
     StepVerifier.create(actual)
+        // Assert
         .expectSubscription()
         .assertNext(
             actualPl -> assertThat(actualPl.getImages())
-                .extracting(Image::getWidth).containsSequence(0, 1, 2, 3))
+                .extracting(Image::getWidth).containsSequence(1, 2, 3, null))
         .verifyComplete();
 
+  }
+
+  private List<Image> getImagesWithOrderByWidth(Integer... widths) {
+    return Arrays.stream(widths).map(width -> new Image("url", width, 1)).toList();
   }
 
 }

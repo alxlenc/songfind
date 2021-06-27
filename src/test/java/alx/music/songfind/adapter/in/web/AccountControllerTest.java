@@ -30,33 +30,35 @@ import org.springframework.test.web.servlet.MockMvc;
 @Import(TestSecurityConfiguration.class)
 public class AccountControllerTest {
 
+  private static final String ACCOUNT_RESOURCE = "/api/account";
+  private ArgumentCaptor<Principal> principalCaptor;
   @Autowired
   private MockMvc mockMvc;
-
   @MockBean
   private SecurityMapper securityMapper;
 
-  ArgumentCaptor<Principal> principalCaptor;
-
-  @Test
-  @WithLoggedUser
-  void logout() throws Exception {
-
-    this.mockMvc.perform(post("/api/logout")
-        .with(csrf()))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.logoutUrl").value(TestSecurityConfiguration.END_SESSION_ENDPOINT))
-        .andExpect(jsonPath("$.idToken").isString());
-  }
-
   @Test
   @WithMockUser
-  void authorizedRequestIsOk() throws Exception {
+  void getAccountReturnsAccount() throws Exception {
+    // Arrange
+    String alice = "Alice";
+    User user = this.createUser(alice);
 
+    when(this.securityMapper.getUserFromAuthentication(any(AbstractAuthenticationToken.class)))
+        .thenReturn(user);
+
+    // Act
+    this.mockMvc.perform(get(ACCOUNT_RESOURCE))
+        //Assert
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.firstName").value(alice));
+  }
+
+  private User createUser(String firstName) {
     User user = new User();
     user.setLogin("alice01");
     user.setId("00011");
-    user.setFirstName("Alice");
+    user.setFirstName(firstName);
     user.setLastName("LastName");
     user.setEmail("alice@alice.com");
     user.setActivated(false);
@@ -65,24 +67,34 @@ public class AccountControllerTest {
     Set<Authority> authorities = Set.of("USER", "ADMIN").stream().map(Authority::new)
         .collect(toSet());
     user.setAuthorities(authorities);
-
-    when(this.securityMapper.getUserFromAuthentication(any(AbstractAuthenticationToken.class)))
-        .thenReturn(user);
-
-    this.mockMvc.perform(get("/api/account"))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.firstName").value("Alice"));
+    return user;
   }
 
   @Test
-  void unauthorizedRequestReturnsUnauthorized() throws Exception {
-    this.mockMvc.perform(get("/api/account"))
+  void unauthorizedGetAccountReturnsUnauthorized() throws Exception {
+    // Act
+    this.mockMvc.perform(get(ACCOUNT_RESOURCE))
+        // Assert
         .andExpect(status().isUnauthorized());
   }
 
   @Test
-  void loginEndPointReturnsRedirect() throws Exception {
+  @WithLoggedUser
+  void logoutReturnsIdProviderLogoutUrlAndIdToken() throws Exception {
+    // Act
+    this.mockMvc.perform(post("/api/logout")
+        .with(csrf()))
+        // Assert
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.logoutUrl").value(TestSecurityConfiguration.END_SESSION_ENDPOINT))
+        .andExpect(jsonPath("$.idToken").isString());
+  }
+
+  @Test
+  void loginReturnsRedirect() throws Exception {
+    // Act
     this.mockMvc.perform(get("/login/oauth2/authorization/songfind"))
+        // Assert
         .andExpect(status().is3xxRedirection());
   }
 }

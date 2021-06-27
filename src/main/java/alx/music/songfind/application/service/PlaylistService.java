@@ -18,13 +18,13 @@ import reactor.core.publisher.Flux;
 @RequiredArgsConstructor
 class PlaylistService implements GetPlaylistQuery, GetPlaylistTracksQuery {
 
+  private static final Comparator<Image> byImgWidthAsc = Comparator
+      .comparingInt(image -> image.getWidth() != null ? image.getWidth() : Integer.MAX_VALUE);
   private final GetPLaylistPort getPLaylistPort;
-
-  private static final Comparator<Image> byImgWidthAsc = Comparator.comparingInt(Image::getWidth);
 
   @Override
   public Flux<Playlist> getCurrentUserPlaylists() {
-    return withSortedImages(this.getPLaylistPort.getCurrentUserPlaylists());
+    return this.withSortedImages(this.getPLaylistPort.getCurrentUserPlaylists());
   }
 
   private Flux<Playlist> withSortedImages(Flux<Playlist> publish) {
@@ -37,6 +37,6 @@ class PlaylistService implements GetPlaylistQuery, GetPlaylistTracksQuery {
 
   @Override
   public Flux<PlaylistTrack> getPlaylistTracks(String playlistId) {
-    return getPLaylistPort.getPlaylistTracks(playlistId);
+    return this.getPLaylistPort.getPlaylistTracks(playlistId);
   }
 }
