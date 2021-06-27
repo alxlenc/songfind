@@ -4,7 +4,7 @@ import alx.music.songfind.domain.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.ObjectFactory;
 
-@Mapper(uses = ImageMapper.class)
+@Mapper(config = MapperConfiguration.class, uses = ImageMapper.class)
 public interface UserMapper {
 
   User toDomain(alx.music.songfind.adapter.out.web.spotify.model.User user);

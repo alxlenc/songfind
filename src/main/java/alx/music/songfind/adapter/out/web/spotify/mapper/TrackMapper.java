@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.NullValueMappingStrategy;
 import org.mapstruct.ObjectFactory;
 
-@Mapper
+@Mapper(config = MapperConfiguration.class)
 public interface TrackMapper {
 
   Track toDomain(alx.music.songfind.adapter.out.web.spotify.model.Track track);

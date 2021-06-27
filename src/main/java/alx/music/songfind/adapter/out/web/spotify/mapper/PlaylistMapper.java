@@ -5,7 +5,7 @@ import alx.music.songfind.domain.Playlist.TracksInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.ObjectFactory;
 
-@Mapper(uses = ImageMapper.class)
+@Mapper(config = MapperConfiguration.class, uses = ImageMapper.class)
 public interface PlaylistMapper {
 
   Playlist toDomain(alx.music.songfind.adapter.out.web.spotify.model.Playlist playlist);
