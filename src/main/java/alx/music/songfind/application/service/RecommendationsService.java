@@ -15,7 +15,8 @@ class RecommendationsService implements GetRecommendationsQuery {
 
   @Override
   public Recommendations getRecommendations(GetRecommendationsCommand getRecommendationsCommand) {
-    return this.recommendationsPort.getRecoRecommendations(getRecommendationsCommand);
+    return this.recommendationsPort
+        .getRecommendations(getRecommendationsCommand.getArtistIds());
   }
 
 }

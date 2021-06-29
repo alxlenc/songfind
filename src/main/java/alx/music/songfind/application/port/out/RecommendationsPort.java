@@ -1,10 +1,10 @@
 package alx.music.songfind.application.port.out;
 
-import alx.music.songfind.application.port.in.GetRecommendationsCommand;
 import alx.music.songfind.domain.Recommendations;
+import java.util.List;
 
 public interface RecommendationsPort {
 
-  Recommendations getRecoRecommendations(GetRecommendationsCommand params);
+  Recommendations getRecommendations(List<String> artistIds);
 
 }

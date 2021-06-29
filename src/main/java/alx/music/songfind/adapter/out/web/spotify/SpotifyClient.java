@@ -9,7 +9,7 @@ import alx.music.songfind.adapter.out.web.spotify.model.PlaylistTrack;
 import alx.music.songfind.adapter.out.web.spotify.model.Recommendations;
 import alx.music.songfind.adapter.out.web.spotify.model.SearchResults;
 import alx.music.songfind.adapter.out.web.spotify.model.User;
-import alx.music.songfind.application.port.in.GetRecommendationsCommand;
+import java.util.List;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -55,9 +55,9 @@ public class SpotifyClient {
         });
   }
 
-  public Mono<Recommendations> getRecommendations(GetRecommendationsCommand params) {
+  public Mono<Recommendations> getRecommendations(List<String> artistIds) {
     return this.webClient.get().uri(uriBuilder -> uriBuilder.path("/v1/recommendations")
-        .queryParam("seed_artists", params.getArtistIds().toArray())
+        .queryParam("seed_artists", artistIds)
         .build()).retrieve().bodyToMono(Recommendations.class);
   }
 
