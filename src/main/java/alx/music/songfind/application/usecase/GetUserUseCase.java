@@ -1,4 +1,4 @@
-package alx.music.songfind.application.service;
+package alx.music.songfind.application.usecase;
 
 import alx.music.songfind.application.port.in.GetUserQuery;
 import alx.music.songfind.application.port.out.GetUserPort;
@@ -9,12 +9,12 @@ import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-class UserService implements GetUserQuery {
+class GetUserUseCase implements GetUserQuery {
 
   private final GetUserPort getUserPort;
 
   @Override
   public Mono<User> getCurrentAccount() {
-    return getUserPort.getCurrentAccount();
+    return this.getUserPort.getCurrentAccount();
   }
 }

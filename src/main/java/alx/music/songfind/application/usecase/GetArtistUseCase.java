@@ -1,4 +1,4 @@
-package alx.music.songfind.application.service;
+package alx.music.songfind.application.usecase;
 
 import alx.music.songfind.application.port.in.SearchArtistQuery;
 import alx.music.songfind.application.port.out.SearchArtistPort;
@@ -10,7 +10,7 @@ import reactor.core.publisher.Flux;
 
 @Service
 @RequiredArgsConstructor
-class ArtistService implements SearchArtistQuery {
+class GetArtistUseCase implements SearchArtistQuery {
 
   private final SearchArtistPort searchArtistPort;
   @Value("${application.artist.max-search-results}")
@@ -18,6 +18,6 @@ class ArtistService implements SearchArtistQuery {
 
   @Override
   public Flux<Artist> searchArtist(String query) {
-    return searchArtistPort.searchArtists(query, maxSearchResults);
+    return this.searchArtistPort.searchArtists(query, this.maxSearchResults);
   }
 }

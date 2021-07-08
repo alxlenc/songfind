@@ -1,4 +1,4 @@
-package alx.music.songfind.application.service;
+package alx.music.songfind.application.usecase;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -18,10 +18,10 @@ import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
 @ExtendWith(MockitoExtension.class)
-public class PlaylistServiceTest {
+public class GetPlaylistUseCaseTest {
 
   @InjectMocks
-  PlaylistService sut;
+  GetPlaylistUseCase sut;
 
   @Mock
   GetPLaylistPort getPLaylistPort;

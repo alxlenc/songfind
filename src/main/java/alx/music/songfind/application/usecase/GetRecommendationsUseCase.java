@@ -1,4 +1,4 @@
-package alx.music.songfind.application.service;
+package alx.music.songfind.application.usecase;
 
 import alx.music.songfind.application.port.in.GetRecommendationsCommand;
 import alx.music.songfind.application.port.in.GetRecommendationsQuery;
@@ -9,14 +9,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-class RecommendationsService implements GetRecommendationsQuery {
+class GetRecommendationsUseCase implements GetRecommendationsQuery {
 
   private final RecommendationsPort recommendationsPort;
 
   @Override
   public Recommendations getRecommendations(GetRecommendationsCommand getRecommendationsCommand) {
     return this.recommendationsPort
-        .getRecommendations(getRecommendationsCommand.getArtistIds());
+        .getRecommendations(getRecommendationsCommand.getArtistIds())
+        .withTracksSortedByPopularityDesc();
   }
 
 }

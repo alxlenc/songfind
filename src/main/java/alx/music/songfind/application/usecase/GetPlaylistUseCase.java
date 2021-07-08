@@ -1,4 +1,4 @@
-package alx.music.songfind.application.service;
+package alx.music.songfind.application.usecase;
 
 import static java.util.stream.Collectors.toList;
 
@@ -16,7 +16,7 @@ import reactor.core.publisher.Flux;
 
 @Service
 @RequiredArgsConstructor
-class PlaylistService implements GetPlaylistQuery, GetPlaylistTracksQuery {
+class GetPlaylistUseCase implements GetPlaylistQuery, GetPlaylistTracksQuery {
 
   private static final Comparator<Image> byImgWidthAsc = Comparator
       .comparingInt(image -> image.getWidth() != null ? image.getWidth() : Integer.MAX_VALUE);
