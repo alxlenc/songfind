@@ -4,6 +4,6 @@ import alx.music.songfind.domain.Recommendations;
 
 public interface GetRecommendationsQuery {
 
-  Recommendations getRecommendations(GetRecommendationsCommand getRecommendationsCommand);
+  Recommendations getRecommendations(GetRecommendationsQueryParam getRecommendationsQueryParam);
 
 }

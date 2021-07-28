@@ -2,12 +2,16 @@ package alx.music.songfind.application.port.in;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class GetRecommendationsCommand {
+@Builder
+public class GetRecommendationsQueryParam {
 
   private final List<String> artistIds;
+  private final Integer minPopularity;
+  private final Integer maxPopularity;
 
 }

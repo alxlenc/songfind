@@ -2,8 +2,8 @@ package alx.music.songfind.adapter.in.web;
 
 import alx.music.songfind.adapter.in.web.mapper.RecommendationsViewModelMapper;
 import alx.music.songfind.adapter.in.web.model.Recommendations;
-import alx.music.songfind.application.port.in.GetRecommendationsCommand;
 import alx.music.songfind.application.port.in.GetRecommendationsQuery;
+import alx.music.songfind.application.port.in.GetRecommendationsQueryParam;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,13 +23,20 @@ class RecommendationsController {
 
   @GetMapping
   public Recommendations getRecommendations(
-      @RequestParam(value = "seed_artists", required = false) List<String> artistIds) {
+      @RequestParam(name = "seed_artists", required = false) List<String> artistIds,
+      @RequestParam(name = "min_popularity", required = false) Integer minPopularity,
+      @RequestParam(name = "max_popularity", required = false) Integer maxPopularity) {
 
     log.info("Requesting recommendations for artists: {}", artistIds);
 
-    GetRecommendationsCommand getRecommendationsCommand = new GetRecommendationsCommand(artistIds);
+    GetRecommendationsQueryParam getRecommendationsQueryParam = GetRecommendationsQueryParam
+        .builder()
+        .artistIds(artistIds)
+        .minPopularity(minPopularity)
+        .maxPopularity(maxPopularity)
+        .build();
     alx.music.songfind.domain.Recommendations recommendations = this.getRecommendationsQuery
-        .getRecommendations(getRecommendationsCommand);
+        .getRecommendations(getRecommendationsQueryParam);
     return this.mapper.toViewModel(recommendations);
   }
 
