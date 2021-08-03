@@ -3,6 +3,7 @@ package alx.music.songfind.adapter.in.web;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import alx.music.songfind.adapter.in.web.mapper.SpotifyUserMapper;
 import alx.music.songfind.application.port.in.GetSpotifyUserQuery;
 import alx.music.songfind.config.TestSecurityConfiguration;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,9 @@ public class SpotifyAccountControllerTest {
 
   @MockBean
   private GetSpotifyUserQuery getSpotifyUserQuery;
+
+  @MockBean
+  private SpotifyUserMapper spotifyUserMapper;
 
   @Test
   public void unauthorizedRequestReturnsUnauthorized() throws Exception {

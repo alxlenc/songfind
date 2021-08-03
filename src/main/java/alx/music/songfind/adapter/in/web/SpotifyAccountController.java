@@ -1,7 +1,8 @@
 package alx.music.songfind.adapter.in.web;
 
+import alx.music.songfind.adapter.in.web.mapper.SpotifyUserMapper;
+import alx.music.songfind.adapter.in.web.model.SpotifyUser;
 import alx.music.songfind.application.port.in.GetSpotifyUserQuery;
-import alx.music.songfind.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 class SpotifyAccountController {
 
   private final GetSpotifyUserQuery userQuery;
-
+  private final SpotifyUserMapper spotifyUserMapper;
 
   @GetMapping("/account")
-  public User getSpotifyAccount() {
-    return this.userQuery.getCurrentAccount().block();
+  public SpotifyUser getSpotifyAccount() {
+    return this.userQuery.getCurrentAccount()
+        .map(this.spotifyUserMapper::toViewModel).block();
   }
 
 }
