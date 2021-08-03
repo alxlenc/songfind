@@ -1,7 +1,7 @@
 package alx.music.songfind.application.usecase;
 
-import alx.music.songfind.application.port.in.GetUserQuery;
-import alx.music.songfind.application.port.out.GetUserPort;
+import alx.music.songfind.application.port.in.GetSpotifyUserQuery;
+import alx.music.songfind.application.port.out.GetSpotifyUserPort;
 import alx.music.songfind.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,12 +9,12 @@ import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-class GetUserUseCase implements GetUserQuery {
+class GetSpotifyUserUseCase implements GetSpotifyUserQuery {
 
-  private final GetUserPort getUserPort;
+  private final GetSpotifyUserPort getSpotifyUserPort;
 
   @Override
   public Mono<User> getCurrentAccount() {
-    return this.getUserPort.getCurrentAccount();
+    return this.getSpotifyUserPort.getCurrentAccount();
   }
 }

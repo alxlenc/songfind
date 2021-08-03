@@ -3,7 +3,7 @@ package alx.music.songfind.adapter.in.web;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import alx.music.songfind.application.port.in.GetUserQuery;
+import alx.music.songfind.application.port.in.GetSpotifyUserQuery;
 import alx.music.songfind.config.TestSecurityConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +18,12 @@ import org.springframework.test.web.servlet.MockMvc;
 public class SpotifyAccountControllerTest {
 
   private static final String SPOTIFY_ACCOUNT_RESOURCE = "/api/spotify/account";
-  
+
   @Autowired
   private MockMvc mockMvc;
 
   @MockBean
-  private GetUserQuery getUserQuery;
+  private GetSpotifyUserQuery getSpotifyUserQuery;
 
   @Test
   public void unauthorizedRequestReturnsUnauthorized() throws Exception {

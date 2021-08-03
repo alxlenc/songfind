@@ -21,7 +21,7 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component
-public class SpotifyClient {
+class SpotifyClient {
 
   @Getter
   private final int pageSize = 50;
@@ -41,17 +41,17 @@ public class SpotifyClient {
 
   public Mono<Paginated<Playlist>> getCurrentUserPlaylists(int offset) {
     return this.webClient.get().uri(uriBuilder -> uriBuilder.path("/v1/me/playlists")
-        .queryParam("offset", String.valueOf(offset))
-        .queryParam("limit", String.valueOf(this.pageSize)).build())
+            .queryParam("offset", String.valueOf(offset))
+            .queryParam("limit", String.valueOf(this.pageSize)).build())
         .retrieve().bodyToMono(new ParameterizedTypeReference<Paginated<Playlist>>() {
         });
   }
 
   public Mono<Paginated<PlaylistTrack>> getPlaylistTracks(int offset, String playlistId) {
     return this.webClient.get().uri(uriBuilder ->
-        uriBuilder.path("/v1/playlists/{playlistId}/tracks")
-            .queryParam("offset", String.valueOf(offset))
-            .build(playlistId))
+            uriBuilder.path("/v1/playlists/{playlistId}/tracks")
+                .queryParam("offset", String.valueOf(offset))
+                .build(playlistId))
         .retrieve().bodyToMono(new ParameterizedTypeReference<Paginated<PlaylistTrack>>() {
         });
   }
