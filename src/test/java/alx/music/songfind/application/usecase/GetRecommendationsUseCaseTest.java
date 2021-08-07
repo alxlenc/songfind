@@ -20,6 +20,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
 
 @ExtendWith(MockitoExtension.class)
 class GetRecommendationsUseCaseTest {
@@ -37,12 +39,16 @@ class GetRecommendationsUseCaseTest {
   public void getRecommendationsUseCaseReturnsRecommendationsSorted() {
     // Arrange
     GetRecommendationsQueryParam inputParam = GetRecommendationsQueryParam.builder().build();
-    Recommendations recommendations = this.createRecommendations();
-    when(this.port.getRecommendations(any())).thenReturn(recommendations);
+    when(this.port.getRecommendations(any())).thenReturn(Mono.just(this.createRecommendations()));
     // Act
-    Recommendations actual = this.sut.getRecommendations(inputParam);
+    Mono<Recommendations> actual = this.sut.getRecommendations(inputParam);
     // Assert
-    assertThat(actual.getTracks()).extracting(Track::getPopularity).containsSequence(2, 1);
+    StepVerifier.create(actual)
+        .expectSubscription()
+        .assertNext(actualRec -> assertThat(actualRec.getTracks()).extracting(Track::getPopularity)
+            .containsSequence(2, 1))
+        .verifyComplete();
+
   }
 
   @Test
@@ -53,17 +59,22 @@ class GetRecommendationsUseCaseTest {
         .minPopularity(50)
         .maxPopularity(70)
         .build();
-    when(this.port.getRecommendations(any())).thenReturn(this.createRecommendations());
+    when(this.port.getRecommendations(any())).thenReturn(Mono.just(this.createRecommendations()));
     // Act
-    this.sut.getRecommendations(inputQueryParam);
+    Mono<Recommendations> actual = this.sut.getRecommendations(inputQueryParam);
     // Assert
-    verify(this.port).getRecommendations(this.outputParamCaptor.capture());
-    var outputQueryParam = this.outputParamCaptor
-        .getValue();
-    assertThat(outputQueryParam.getArtistIds()).containsSequence("1", "2");
-    assertThat(outputQueryParam.getMinPopularity()).isEqualTo(50);
-    assertThat(outputQueryParam.getMaxPopularity()).isEqualTo(70);
-    assertThat(outputQueryParam.getTargetPopularity()).isEqualTo(70);
+    StepVerifier.create(actual)
+        .expectSubscription()
+        .assertNext(actualRec -> {
+          verify(this.port).getRecommendations(this.outputParamCaptor.capture());
+          var outputQueryParam = this.outputParamCaptor
+              .getValue();
+          assertThat(outputQueryParam.getArtistIds()).containsSequence("1", "2");
+          assertThat(outputQueryParam.getMinPopularity()).isEqualTo(50);
+          assertThat(outputQueryParam.getMaxPopularity()).isEqualTo(70);
+          assertThat(outputQueryParam.getTargetPopularity()).isEqualTo(70);
+        }).verifyComplete();
+
 
   }
 

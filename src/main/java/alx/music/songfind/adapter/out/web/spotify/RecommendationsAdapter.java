@@ -6,6 +6,7 @@ import alx.music.songfind.application.port.out.RecommendationsPort;
 import alx.music.songfind.domain.Recommendations;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
@@ -15,8 +16,8 @@ class RecommendationsAdapter implements RecommendationsPort {
   private final RecommendationsMapper recommendationsMapper;
 
   @Override
-  public Recommendations getRecommendations(GetRecommendationsQueryParam queryParam) {
-    return this.recommendationsMapper
-        .toDomain(this.spotifyClient.getRecommendations(queryParam).block());
+  public Mono<Recommendations> getRecommendations(GetRecommendationsQueryParam queryParam) {
+    return this.spotifyClient.getRecommendations(queryParam)
+        .map(this.recommendationsMapper::toDomain);
   }
 }

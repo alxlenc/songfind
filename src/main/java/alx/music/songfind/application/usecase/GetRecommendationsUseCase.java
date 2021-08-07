@@ -6,6 +6,7 @@ import alx.music.songfind.application.port.out.RecommendationsPort;
 import alx.music.songfind.domain.Recommendations;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
@@ -15,12 +16,13 @@ class GetRecommendationsUseCase implements GetRecommendationsQuery {
   private final GetRecommendationsQueryParamMapper paramMapper;
 
   @Override
-  public Recommendations getRecommendations(
+  public Mono<Recommendations> getRecommendations(
       GetRecommendationsQueryParam getRecommendationsQueryParam) {
     var queryParam = this.paramMapper.map(getRecommendationsQueryParam);
     return this.recommendationsPort
         .getRecommendations(queryParam)
-        .withTracksSortedByPopularityDesc();
+        .map(Recommendations::withTracksSortedByPopularityDesc);
+
   }
 
 }

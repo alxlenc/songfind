@@ -35,9 +35,11 @@ class RecommendationsController {
         .minPopularity(minPopularity)
         .maxPopularity(maxPopularity)
         .build();
-    alx.music.songfind.domain.Recommendations recommendations = this.getRecommendationsQuery
-        .getRecommendations(getRecommendationsQueryParam);
-    return this.mapper.toViewModel(recommendations);
+    
+    return this.getRecommendationsQuery
+        .getRecommendations(getRecommendationsQueryParam)
+        .map(this.mapper::toViewModel)
+        .block();
   }
 
 
