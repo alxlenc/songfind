@@ -48,15 +48,6 @@ class RecommendationsController {
         .map(this.mapper::toViewModel);
 
     return this.recommendationsCache.getOrFetch(getRecommendationsQueryParam, source).block();
-//    return this.getIfNotCached(getRecommendationsQueryParam, recommendationsMono).block();
   }
-
-//  private Mono<Recommendations> getIfNotCached(GetRecommendationsQueryParam cacheKey,
-//      Mono<Recommendations> recommendationsMono) {
-//    return this.recommendationsCache.get(cacheKey)
-//        .switchIfEmpty(recommendationsMono)
-//        .flatMap(rec -> this.recommendationsCache.fastPut(cacheKey, rec).thenReturn(rec));
-//  }
-
-
+  
 }
