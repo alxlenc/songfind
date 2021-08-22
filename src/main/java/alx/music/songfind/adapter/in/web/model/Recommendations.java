@@ -1,6 +1,6 @@
 package alx.music.songfind.adapter.in.web.model;
 
-import alx.music.songfind.domain.Track;
+
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
