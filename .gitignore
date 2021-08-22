@@ -7,6 +7,7 @@ target/
 **/*.jar
 **/*.jar.deployed
 
+secrets.properties
 
 ### STS ###
 .apt_generated
