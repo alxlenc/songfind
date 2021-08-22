@@ -2,15 +2,18 @@ package alx.music.songfind.adapter.in.web;
 
 import alx.music.songfind.adapter.in.web.mapper.RecommendationsViewModelMapper;
 import alx.music.songfind.adapter.in.web.model.Recommendations;
+import alx.music.songfind.adapter.in.web.util.CacheTemplate;
 import alx.music.songfind.application.port.in.GetRecommendationsQuery;
 import alx.music.songfind.application.port.in.GetRecommendationsQueryParam;
 import java.util.List;
+import java.util.function.Supplier;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/api/recommendations")
@@ -20,6 +23,8 @@ class RecommendationsController {
 
   private final GetRecommendationsQuery getRecommendationsQuery;
   private final RecommendationsViewModelMapper mapper;
+  private final CacheTemplate<GetRecommendationsQueryParam, Recommendations> recommendationsCache;
+
 
   @GetMapping
   public Recommendations getRecommendations(
@@ -35,12 +40,23 @@ class RecommendationsController {
         .minPopularity(minPopularity)
         .maxPopularity(maxPopularity)
         .build();
-    
-    return this.getRecommendationsQuery
+
+    String cacheKey = getRecommendationsQueryParam.toString();
+
+    Supplier<Mono<Recommendations>> source = () -> this.getRecommendationsQuery
         .getRecommendations(getRecommendationsQueryParam)
-        .map(this.mapper::toViewModel)
-        .block();
+        .map(this.mapper::toViewModel);
+
+    return this.recommendationsCache.getOrFetch(getRecommendationsQueryParam, source).block();
+//    return this.getIfNotCached(getRecommendationsQueryParam, recommendationsMono).block();
   }
+
+//  private Mono<Recommendations> getIfNotCached(GetRecommendationsQueryParam cacheKey,
+//      Mono<Recommendations> recommendationsMono) {
+//    return this.recommendationsCache.get(cacheKey)
+//        .switchIfEmpty(recommendationsMono)
+//        .flatMap(rec -> this.recommendationsCache.fastPut(cacheKey, rec).thenReturn(rec));
+//  }
 
 
 }

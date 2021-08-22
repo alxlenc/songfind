@@ -8,24 +8,33 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import alx.music.songfind.adapter.in.web.mapper.RecommendationsViewModelMapper;
+import alx.music.songfind.adapter.in.web.mapper.RecommendationsViewModelMapperImpl;
+import alx.music.songfind.adapter.in.web.util.CacheTemplate;
 import alx.music.songfind.application.port.in.GetRecommendationsQuery;
 import alx.music.songfind.application.port.in.GetRecommendationsQueryParam;
+import alx.music.songfind.config.TestCacheConfiguration;
 import alx.music.songfind.config.TestSecurityConfiguration;
 import alx.music.songfind.config.WithLoggedUser;
 import alx.music.songfind.domain.Recommendations;
+import alx.music.songfind.domain.Track;
 import java.util.Collections;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import reactor.core.publisher.Mono;
 
 @WebMvcTest(RecommendationsController.class)
-@Import(TestSecurityConfiguration.class)
+@Import({TestSecurityConfiguration.class, TestCacheConfiguration.class})
 public class RecommendationsControllerTest {
 
   private static final String RECOMMENDATIONS_RESOURCE = "/api/recommendations";
@@ -36,11 +45,20 @@ public class RecommendationsControllerTest {
   @MockBean
   private GetRecommendationsQuery getRecommendationsQuery;
 
-  @MockBean
-  private RecommendationsViewModelMapper recommendationsMapper;
+  @SpyBean
+  private CacheTemplate<GetRecommendationsQueryParam, Recommendations> recommendationsCache;
 
   @Captor
   private ArgumentCaptor<GetRecommendationsQueryParam> commandCaptor;
+
+  @TestConfiguration
+  static class RecommendationsControllerTestConfig {
+
+    @Bean
+    RecommendationsViewModelMapper recommendationsViewModelMapper() {
+      return new RecommendationsViewModelMapperImpl();
+    }
+  }
 
   @Test
   void unauthorizedGetRecommendationsByPlaylistReturnsUnauthorized() throws Exception {
@@ -54,8 +72,6 @@ public class RecommendationsControllerTest {
     // Arrange
     when(this.getRecommendationsQuery.getRecommendations(any()))
         .thenReturn(Mono.just(this.createEmptyRecommendations()));
-    when(this.recommendationsMapper.toViewModel(any()))
-        .thenReturn(new alx.music.songfind.adapter.in.web.model.Recommendations());
 
     // Act
     this.mockMvc.perform(get(RECOMMENDATIONS_RESOURCE)
@@ -80,8 +96,7 @@ public class RecommendationsControllerTest {
     // Arrange
     when(this.getRecommendationsQuery.getRecommendations(any()))
         .thenReturn(Mono.just(this.createEmptyRecommendations()));
-    when(this.recommendationsMapper.toViewModel(any()))
-        .thenReturn(new alx.music.songfind.adapter.in.web.model.Recommendations());
+
     // Act
     this.mockMvc.perform(get(RECOMMENDATIONS_RESOURCE)
             .param("seed_artists", "1", "2")
@@ -99,4 +114,25 @@ public class RecommendationsControllerTest {
 
   }
 
+  @Test
+  @WithLoggedUser
+  void getRecommendationsForArtistsWithIdsReturnsRecommendations() throws Exception {
+    // Arrange
+    when(this.getRecommendationsQuery.getRecommendations(any()))
+        .thenReturn(Mono.just(this.createRecommendations()));
+
+    // Act
+    this.mockMvc.perform(
+            get(RECOMMENDATIONS_RESOURCE)
+                .param("seed_artists", "1", "2", "3"))
+        // Assert
+        .andExpect(status().isOk())
+        .andDo(MockMvcResultHandlers.print());
+
+  }
+
+  private Recommendations createRecommendations() {
+    List<Track> tracks = List.of(new Track("t1", "First Song", 1234, Collections.emptyList()));
+    return new Recommendations(Collections.emptyList(), tracks);
+  }
 }
