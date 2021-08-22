@@ -21,6 +21,7 @@
     <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
     <spring-cloud-contract.version>3.0.3</spring-cloud-contract.version>
     <problem-spring-web.version>0.27.0-RC.0</problem-spring-web.version>
+    <redisson-spring-boot-starter.version>3.16.1</redisson-spring-boot-starter.version>
   </properties>
 
   <dependencies>
@@ -49,14 +50,24 @@
       <artifactId>spring-security-data</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.session</groupId>
       <artifactId>spring-session-data-redis</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.redisson</groupId>
+      <artifactId>redisson-spring-boot-starter</artifactId>
+      <version>${redisson-spring-boot-starter.version}</version>
+    </dependency>
+
+    <!-- TODO: REMOVE LETTUCE DEPENDENCY -->
+    <dependency>
       <groupId>io.lettuce</groupId>
       <artifactId>lettuce-core</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
@@ -87,12 +98,6 @@
     </dependency>
 
     <!-- Test dependencies -->
-    <dependency>
-      <scope>test</scope>
-      <groupId>org.testcontainers</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>1.15.3</version>
-    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
