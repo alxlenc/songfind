@@ -6,6 +6,9 @@
   <logger name="com.github.tomakehurst.wiremock" level="WARN"/>
   <logger name="wiremock.org" level="ERROR"/>
   <logger name="WireMock" level="WARN"/>
+  <!-- debug test context cache refresh -->
+  <!--  <logger name="org.springframework.test.context.cache" level="DEBUG"/>-->
+
   <!-- wiremock has per endpoint servlet logging -->
 
 </configuration>

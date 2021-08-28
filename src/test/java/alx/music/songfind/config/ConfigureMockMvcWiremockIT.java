@@ -12,9 +12,9 @@ import org.springframework.test.context.ActiveProfiles;
 
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@SpringBootTest(properties = "application.spotify-api.base-url=http://localhost:8765")
+@SpringBootTest(properties = "application.spotify-api.base-url=http://localhost:${wiremock.server.port}")
 @Import({SpotifyTestWebClient.class, TestSecurityConfiguration.class})
-@AutoConfigureWireMock(port = 8765)
+@AutoConfigureWireMock(port = 0)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 public @interface ConfigureMockMvcWiremockIT {

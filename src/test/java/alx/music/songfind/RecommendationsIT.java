@@ -4,12 +4,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import alx.music.songfind.config.ConfigureMockMvcWiremockIT;
+import alx.music.songfind.config.ConfigureRedisCacheIT;
 import alx.music.songfind.config.WithLoggedUser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 
 @ConfigureMockMvcWiremockIT
+@ConfigureRedisCacheIT
 public class RecommendationsIT {
 
   @Autowired

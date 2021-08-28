@@ -12,7 +12,7 @@ import alx.music.songfind.adapter.in.web.mapper.RecommendationsViewModelMapperIm
 import alx.music.songfind.adapter.in.web.util.CacheTemplate;
 import alx.music.songfind.application.port.in.GetRecommendationsQuery;
 import alx.music.songfind.application.port.in.GetRecommendationsQueryParam;
-import alx.music.songfind.config.TestCacheConfiguration;
+import alx.music.songfind.config.MockCacheConfiguration;
 import alx.music.songfind.config.TestSecurityConfiguration;
 import alx.music.songfind.config.WithLoggedUser;
 import alx.music.songfind.domain.Recommendations;
@@ -34,7 +34,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import reactor.core.publisher.Mono;
 
 @WebMvcTest(RecommendationsController.class)
-@Import({TestSecurityConfiguration.class, TestCacheConfiguration.class})
+@Import({TestSecurityConfiguration.class, MockCacheConfiguration.class})
 public class RecommendationsControllerTest {
 
   private static final String RECOMMENDATIONS_RESOURCE = "/api/recommendations";

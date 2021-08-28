@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 import reactor.core.publisher.Mono;
 
 @TestConfiguration
-public class TestCacheConfiguration {
+public class MockCacheConfiguration {
 
   @Bean
   RedissonReactiveClient redissonReactiveClient(RMapReactive emptyMap) {
