@@ -2,8 +2,8 @@ package alx.music.songfind.adapter.in.web;
 
 import alx.music.songfind.adapter.in.web.mapper.PlaylistTrackViewModelMapper;
 import alx.music.songfind.adapter.in.web.model.PlaylistTrack;
-import alx.music.songfind.application.port.in.GetPlaylistQuery;
 import alx.music.songfind.application.port.in.GetPlaylistTracksQuery;
+import alx.music.songfind.application.port.in.GetUserPlaylistsQuery;
 import alx.music.songfind.domain.Playlist;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 class PlaylistController {
 
-  private final GetPlaylistQuery playlistQuery;
+  private final GetUserPlaylistsQuery playlistQuery;
   private final GetPlaylistTracksQuery playlistTracksQuery;
   private final PlaylistTrackViewModelMapper playlistTrackMapper;
 

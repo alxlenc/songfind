@@ -6,7 +6,6 @@
 
 ![Branches](.github/badges/branches.svg)
 
-
 --> Discover New Music
 
 # Intro / Basic overview

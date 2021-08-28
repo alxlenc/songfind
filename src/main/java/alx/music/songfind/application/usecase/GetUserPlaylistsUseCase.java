@@ -2,8 +2,8 @@ package alx.music.songfind.application.usecase;
 
 import static java.util.stream.Collectors.toList;
 
-import alx.music.songfind.application.port.in.GetPlaylistQuery;
 import alx.music.songfind.application.port.in.GetPlaylistTracksQuery;
+import alx.music.songfind.application.port.in.GetUserPlaylistsQuery;
 import alx.music.songfind.application.port.out.GetPLaylistPort;
 import alx.music.songfind.domain.Image;
 import alx.music.songfind.domain.Playlist;
@@ -16,7 +16,7 @@ import reactor.core.publisher.Flux;
 
 @Service
 @RequiredArgsConstructor
-class GetPlaylistUseCase implements GetPlaylistQuery, GetPlaylistTracksQuery {
+class GetUserPlaylistsUseCase implements GetUserPlaylistsQuery, GetPlaylistTracksQuery {
 
   private static final Comparator<Image> byImgWidthAsc = Comparator
       .comparingInt(image -> image.getWidth() != null ? image.getWidth() : Integer.MAX_VALUE);

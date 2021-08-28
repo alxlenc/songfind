@@ -21,7 +21,7 @@ import reactor.test.StepVerifier;
 public class GetPlaylistUseCaseTest {
 
   @InjectMocks
-  GetPlaylistUseCase sut;
+  GetUserPlaylistsUseCase sut;
 
   @Mock
   GetPLaylistPort getPLaylistPort;

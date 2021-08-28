@@ -15,8 +15,14 @@ import alx.music.songfind.application.port.in.GetRecommendationsQueryParam;
 import alx.music.songfind.config.MockCacheConfiguration;
 import alx.music.songfind.config.TestSecurityConfiguration;
 import alx.music.songfind.config.WithLoggedUser;
+import alx.music.songfind.domain.Album;
+import alx.music.songfind.domain.AlbumType;
+import alx.music.songfind.domain.Artist;
 import alx.music.songfind.domain.Recommendations;
+import alx.music.songfind.domain.Seed;
+import alx.music.songfind.domain.SeedType;
 import alx.music.songfind.domain.Track;
+import alx.music.songfind.domain.Track.ExternalIds;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -132,7 +138,13 @@ public class RecommendationsControllerTest {
   }
 
   private Recommendations createRecommendations() {
-    List<Track> tracks = List.of(new Track("t1", "First Song", 1234, Collections.emptyList()));
-    return new Recommendations(Collections.emptyList(), tracks);
+    Artist artist1 = new Artist("id" + 1, "ArtistName" + 1);
+    Track track1 = new Track("t1", "First Song", 1234, List.of(artist1));
+    track1.setAlbum(new Album(AlbumType.ALBUM));
+    track1.setExternalIds(new ExternalIds("track_external_id"));
+    List<Track> tracks = List.of(track1);
+    Seed seed1 = new Seed("id" + 1, "href" + 1, SeedType.ARTIST, 5);
+    List<Seed> seeds = List.of(seed1);
+    return new Recommendations(seeds, tracks);
   }
 }
