@@ -1,6 +1,6 @@
 ![Songfind](/img/banner.png)
 
-[![Java CI with Maven](https://github.com/alxlenc/songfind/actions/workflows/maven.yml/badge.svg)](https://github.com/alxlenc/songfind/actions/workflows/maven.yml)
+[![build](https://github.com/alxlenc/songfind/actions/workflows/maven.yml/badge.svg)](https://github.com/alxlenc/songfind/actions/workflows/maven.yml)
 
 ![Coverage](.github/badges/jacoco.svg)
 
