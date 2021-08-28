@@ -26,6 +26,7 @@ jobs:
       run: mvn -B package --file pom.xml
       
     - name: jacoco-badge-generator
+      id: jacoco
     # You may pin to the exact commit or the version.
     # uses: cicirello/jacoco-badge-generator@19063b7db4fc4638ce8604f4262da6d21300ed38
       uses: cicirello/jacoco-badge-generator@v2.4.1
