@@ -1,12 +1,7 @@
 ![Songfind](/img/banner.png)
 
-[![build](https://github.com/alxlenc/songfind/actions/workflows/maven.yml/badge.svg)](https://github.com/alxlenc/songfind/actions/workflows/maven.yml)
+[![build](https://github.com/alxlenc/songfind/actions/workflows/maven.yml/badge.svg)](https://github.com/alxlenc/songfind/actions/workflows/maven.yml)  ![coverage](.github/badges/jacoco.svg)
 
-![Coverage](.github/badges/jacoco.svg)
-
-![Branches](.github/badges/branches.svg)
-
---> Discover New Music
 
 # Intro / Basic overview
 
