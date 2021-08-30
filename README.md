@@ -42,7 +42,7 @@ Here are a some videos to showcase the tech stack and the development workflow.
 
 #### [Hexagonal Architecture](https://www.youtube.com/watch?v=eiGwvGBXFT8)
 
-#### [Tekton Pipelines](https://www.youtube.com/watch?v=HzNx88H7nxU)
+#### [Tekton Pipelines](https://youtu.be/Kvakrsuam3E)
 
 #### [Canary Release](https://www.youtube.com/watch?v=HzNx88H7nxU)
 
