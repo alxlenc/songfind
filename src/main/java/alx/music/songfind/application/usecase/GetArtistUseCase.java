@@ -2,13 +2,13 @@ package alx.music.songfind.application.usecase;
 
 import alx.music.songfind.application.port.in.SearchArtistQuery;
 import alx.music.songfind.application.port.out.SearchArtistPort;
+import alx.music.songfind.common.UseCase;
 import alx.music.songfind.domain.Artist;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
-@Service
+@UseCase
 @RequiredArgsConstructor
 class GetArtistUseCase implements SearchArtistQuery {
 

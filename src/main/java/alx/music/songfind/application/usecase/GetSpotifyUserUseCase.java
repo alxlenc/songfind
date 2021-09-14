@@ -2,12 +2,12 @@ package alx.music.songfind.application.usecase;
 
 import alx.music.songfind.application.port.in.GetSpotifyUserQuery;
 import alx.music.songfind.application.port.out.GetSpotifyUserPort;
+import alx.music.songfind.common.UseCase;
 import alx.music.songfind.domain.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-@Service
+@UseCase
 @RequiredArgsConstructor
 class GetSpotifyUserUseCase implements GetSpotifyUserQuery {
 

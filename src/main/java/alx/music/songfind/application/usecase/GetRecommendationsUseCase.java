@@ -3,12 +3,12 @@ package alx.music.songfind.application.usecase;
 import alx.music.songfind.application.port.in.GetRecommendationsQuery;
 import alx.music.songfind.application.port.in.GetRecommendationsQueryParam;
 import alx.music.songfind.application.port.out.RecommendationsPort;
+import alx.music.songfind.common.UseCase;
 import alx.music.songfind.domain.Recommendations;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-@Service
+@UseCase
 @RequiredArgsConstructor
 class GetRecommendationsUseCase implements GetRecommendationsQuery {
 
