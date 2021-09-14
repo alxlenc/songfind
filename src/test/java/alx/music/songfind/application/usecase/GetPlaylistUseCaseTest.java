@@ -3,7 +3,7 @@ package alx.music.songfind.application.usecase;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import alx.music.songfind.application.port.out.GetPLaylistPort;
+import alx.music.songfind.application.port.out.GetCurrentUserPlaylistPort;
 import alx.music.songfind.domain.Image;
 import alx.music.songfind.domain.Playlist;
 import alx.music.songfind.domain.Playlist.TracksInfo;
@@ -24,7 +24,7 @@ public class GetPlaylistUseCaseTest {
   GetUserPlaylistsUseCase sut;
 
   @Mock
-  GetPLaylistPort getPLaylistPort;
+  GetCurrentUserPlaylistPort getCurrentUserPLaylistPort;
 
   @Test
   void getPlaylistWithUnsortedImagesReturnsPlaylistWithSortedImages() {
@@ -34,7 +34,7 @@ public class GetPlaylistUseCaseTest {
     Playlist pl = new Playlist("pl1", "my playlist", new TracksInfo(10));
     pl.setImages(images);
 
-    when(this.getPLaylistPort.getCurrentUserPlaylists()).thenReturn(Flux.just(pl));
+    when(this.getCurrentUserPLaylistPort.getCurrentUserPlaylists()).thenReturn(Flux.just(pl));
 
     // Act
     Flux<alx.music.songfind.domain.Playlist> actual = this.sut

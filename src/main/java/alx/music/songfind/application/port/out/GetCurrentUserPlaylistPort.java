@@ -4,9 +4,9 @@ import alx.music.songfind.domain.Playlist;
 import alx.music.songfind.domain.PlaylistTrack;
 import reactor.core.publisher.Flux;
 
-public interface GetPLaylistPort {
+public interface GetCurrentUserPlaylistPort {
 
   Flux<Playlist> getCurrentUserPlaylists();
 
-  Flux<PlaylistTrack> getPlaylistTracks(String playlistId);
+
 }

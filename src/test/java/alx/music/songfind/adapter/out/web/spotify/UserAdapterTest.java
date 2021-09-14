@@ -20,7 +20,7 @@ import reactor.test.StepVerifier;
 public class UserAdapterTest {
 
   @InjectMocks
-  private SpotifyUserAdapter sut;
+  private CurrentUserAdapter sut;
 
   @Spy
   private final UserMapper userMapper = new UserMapperImpl(new ImageMapperImpl());

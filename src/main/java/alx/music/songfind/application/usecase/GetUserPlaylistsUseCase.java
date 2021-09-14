@@ -4,7 +4,8 @@ import static java.util.stream.Collectors.toList;
 
 import alx.music.songfind.application.port.in.GetPlaylistTracksQuery;
 import alx.music.songfind.application.port.in.GetUserPlaylistsQuery;
-import alx.music.songfind.application.port.out.GetPLaylistPort;
+import alx.music.songfind.application.port.out.GetCurrentUserPlaylistPort;
+import alx.music.songfind.application.port.out.GetPlaylistTracksPort;
 import alx.music.songfind.domain.Image;
 import alx.music.songfind.domain.Playlist;
 import alx.music.songfind.domain.PlaylistTrack;
@@ -20,11 +21,12 @@ class GetUserPlaylistsUseCase implements GetUserPlaylistsQuery, GetPlaylistTrack
 
   private static final Comparator<Image> byImgWidthAsc = Comparator
       .comparingInt(image -> image.getWidth() != null ? image.getWidth() : Integer.MAX_VALUE);
-  private final GetPLaylistPort getPLaylistPort;
+  private final GetPlaylistTracksPort getPlaylistTracksPort;
+  private final GetCurrentUserPlaylistPort getCurrentUserPlaylistsPort;
 
   @Override
   public Flux<Playlist> getCurrentUserPlaylists() {
-    return this.withSortedImages(this.getPLaylistPort.getCurrentUserPlaylists());
+    return this.withSortedImages(this.getCurrentUserPlaylistsPort.getCurrentUserPlaylists());
   }
 
   private Flux<Playlist> withSortedImages(Flux<Playlist> publish) {
@@ -37,6 +39,6 @@ class GetUserPlaylistsUseCase implements GetUserPlaylistsQuery, GetPlaylistTrack
 
   @Override
   public Flux<PlaylistTrack> getPlaylistTracks(String playlistId) {
-    return this.getPLaylistPort.getPlaylistTracks(playlistId);
+    return this.getPlaylistTracksPort.getPlaylistTracks(playlistId);
   }
 }
