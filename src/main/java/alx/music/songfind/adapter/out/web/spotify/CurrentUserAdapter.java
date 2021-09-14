@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-class SpotifyUserAdapter implements GetSpotifyUserPort {
+class CurrentUserAdapter implements GetSpotifyUserPort {
 
   private final SpotifyClient spotifyClient;
   private final UserMapper userMapper;
