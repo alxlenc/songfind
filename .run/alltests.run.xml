@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="alltests" type="JUnit" factoryName="JUnit" singleton="false">
+    <module name="songfind"/>
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true"/>
+    <option name="ALTERNATIVE_JRE_PATH" value="liberica-16"/>
+    <option name="MAIN_CLASS_NAME" value=""/>
+    <option name="METHOD_NAME" value=""/>
+    <option name="TEST_OBJECT" value="directory"/>
+    <option name="VM_PARAMETERS" value="-ea -noverify -mx2048m -XX:TieredStopAtLevel=1"/>
+    <dir value="$PROJECT_DIR$/src/test"/>
+    <method v="2">
+      <option name="Make" enabled="true"/>
+    </method>
+  </configuration>
+</component>
