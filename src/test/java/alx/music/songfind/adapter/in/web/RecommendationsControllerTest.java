@@ -9,7 +9,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import alx.music.songfind.adapter.in.web.mapper.RecommendationsViewModelMapper;
 import alx.music.songfind.adapter.in.web.mapper.RecommendationsViewModelMapperImpl;
-import alx.music.songfind.adapter.in.web.util.CacheTemplate;
 import alx.music.songfind.application.port.in.GetRecommendationsQuery;
 import alx.music.songfind.application.port.in.GetRecommendationsQueryParam;
 import alx.music.songfind.config.MockCacheConfiguration;
@@ -32,7 +31,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
@@ -50,9 +48,6 @@ public class RecommendationsControllerTest {
 
   @MockBean
   private GetRecommendationsQuery getRecommendationsQuery;
-
-  @SpyBean
-  private CacheTemplate<GetRecommendationsQueryParam, Recommendations> recommendationsCache;
 
   @Captor
   private ArgumentCaptor<GetRecommendationsQueryParam> commandCaptor;

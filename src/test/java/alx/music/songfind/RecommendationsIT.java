@@ -1,6 +1,8 @@
 package alx.music.songfind;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import alx.music.songfind.config.ConfigureMockMvcWiremockIT;
@@ -21,8 +23,9 @@ public class RecommendationsIT {
   @WithLoggedUser
   public void getRecommendations() throws Exception {
     this.mockMvc.perform(get("/api/recommendations")
-        .param("seed_artists", "5bHjVR4F2Tfq4Ha6x7K6wU")
-    ).andExpect(status().isOk());
+            .param("seed_artists", "5bHjVR4F2Tfq4Ha6x7K6wU")
+        ).andExpect(status().isOk())
+        .andExpect(jsonPath("$.tracks", hasSize(5)));
   }
 
 }
