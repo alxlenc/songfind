@@ -1,8 +1,10 @@
-
 server:
   port: ${PORT:8888}
 
 application:
+  cache:
+    recommendations:
+      ttlSeconds: 30
   artist:
     max-search-results: 5
   spotify-api:

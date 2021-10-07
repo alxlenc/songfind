@@ -2,9 +2,9 @@ package alx.music.songfind.adapter.in.web;
 
 import alx.music.songfind.adapter.in.web.mapper.RecommendationsViewModelMapper;
 import alx.music.songfind.adapter.in.web.model.Recommendations;
-import alx.music.songfind.adapter.in.web.util.CacheTemplate;
 import alx.music.songfind.application.port.in.GetRecommendationsQuery;
 import alx.music.songfind.application.port.in.GetRecommendationsQueryParam;
+import alx.music.songfind.common.ReactiveCacheTemplate;
 import java.util.List;
 import java.util.function.Supplier;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ class RecommendationsController {
 
   private final GetRecommendationsQuery getRecommendationsQuery;
   private final RecommendationsViewModelMapper mapper;
-  private final CacheTemplate<GetRecommendationsQueryParam, Recommendations> recommendationsCache;
+  private final ReactiveCacheTemplate<GetRecommendationsQueryParam, Recommendations> recommendationsCache;
 
 
   @GetMapping
@@ -49,5 +49,5 @@ class RecommendationsController {
 
     return this.recommendationsCache.getOrFetch(getRecommendationsQueryParam, source).block();
   }
-  
+
 }
