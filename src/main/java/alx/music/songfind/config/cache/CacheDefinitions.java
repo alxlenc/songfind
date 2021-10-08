@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class CacheDefinitions {
 
   private CacheDefinition recommendations = new CacheDefinition("songfind:recommendations:results");
+  private CacheDefinition artists = new CacheDefinition("songfind:artists:results");
 
   @Data
   public static class CacheDefinition {
