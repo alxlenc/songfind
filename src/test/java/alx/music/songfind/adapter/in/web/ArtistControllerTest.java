@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import alx.music.songfind.adapter.in.web.mapper.ArtistViewModelMapper;
 import alx.music.songfind.adapter.in.web.mapper.ArtistViewModelMapperImpl;
 import alx.music.songfind.application.port.in.SearchArtistQuery;
+import alx.music.songfind.config.MockCacheConfiguration;
 import alx.music.songfind.config.TestSecurityConfiguration;
 import alx.music.songfind.config.WithLoggedUser;
 import alx.music.songfind.domain.Artist;
@@ -22,7 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import reactor.core.publisher.Flux;
 
 @WebMvcTest(ArtistController.class)
-@Import(TestSecurityConfiguration.class)
+@Import({TestSecurityConfiguration.class, MockCacheConfiguration.class})
 public class ArtistControllerTest {
 
   @TestConfiguration
